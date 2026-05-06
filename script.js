@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initParallaxEffect();
     initFormValidation();
+    initParticles();
 });
 
 // Scroll Reveal Animations
@@ -177,22 +178,43 @@ function initFormValidation() {
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
-            // Simulate form submission (replace with actual API call)
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Prepare form data
+            const formData = new FormData(form);
             
-            // Success state
-            submitBtn.textContent = 'Sent! ✓';
-            submitBtn.style.background = 'linear-gradient(135deg, #00f2ff, #00ff88)';
-            
-            showNotification('お問い合わせありがとうございます！', 'success');
-            
-            // Reset form after delay
-            setTimeout(() => {
-                form.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.background = '';
-            }, 3000);
+            try {
+                // Submit to Formspree via AJAX
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success state
+                    submitBtn.textContent = 'Sent! ✓';
+                    submitBtn.style.background = 'linear-gradient(135deg, #00f2ff, #00ff88)';
+                    showNotification('お問い合わせありがとうございます！', 'success');
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    if (data.errors) {
+                        showNotification(data.errors.map(error => error.message).join(", "), 'error');
+                    } else {
+                        showNotification('送信中にエラーが発生しました', 'error');
+                    }
+                }
+            } catch (error) {
+                showNotification('通信エラーが発生しました', 'error');
+            } finally {
+                // Reset form button after delay
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                }, 3000);
+            }
         });
     }
 }
@@ -240,6 +262,29 @@ function showNotification(message, type = 'info') {
     }, 4000);
 }
 
+// Particles.js Initialization
+function initParticles() {
+    if (typeof particlesJS !== 'undefined') {
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00f2ff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": false },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+            },
+            "retina_detect": true
+        });
+    }
+}
+
 // Add animation keyframes
 const style = document.createElement('style');
 style.textContent = `
@@ -267,14 +312,14 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Mouse Glow Effect on Cards
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
+document.addEventListener('mousemove', (e) => {
+    document.querySelectorAll('.service-card, .case-card, .back-button').forEach(el => {
+        const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
+        el.style.setProperty('--mouse-x', `${x}px`);
+        el.style.setProperty('--mouse-y', `${y}px`);
     });
 });
 

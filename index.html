@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COEDO MUSIC LABO | Creative Innovation</title>
+    <title>COEDO MUSIC LABO | Future Media Innovation</title>
+    <meta name="description" content="COEDO MUSIC LABOは、音楽・映像・出版と最新のAI技術を融合させ、次世代のメディア体験を創造するクリエイティブ・ラボです。">
+    <meta name="keywords" content="COEDO MUSIC LABO, 音楽制作, 映像制作, AI, 出版, 療育, 川越, クリエイティブラボ">
+    
+    <!-- OGP -->
+    <meta property="og:title" content="COEDO MUSIC LABO | Future Media Innovation">
+    <meta property="og:description" content="音楽・映像・AIの融合で、新しい価値を創造するクリエイティブ・ラボ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://myst0518.github.io/coedo_music_labs/">
+    <meta property="og:image" content="https://myst0518.github.io/coedo_music_labs/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,6 +26,7 @@
 </head>
 
 <body>
+    <div id="particles-js"></div>
     <nav class="navbar">
         <div class="logo">COEDO MUSIC LABO</div>
         <ul class="nav-links">
@@ -68,21 +80,27 @@
                         <p>映像制作 / 映像出版</p>
                     </div>
                 </a>
-                <div class="service-card">
-                    <div class="icon">📚</div>
-                    <h3>Books</h3>
-                    <p>書籍制作 / 書籍出版</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">📡</div>
-                    <h3>Broadcast</h3>
-                    <p>放送 / 番組制作<br><span class="detail">(ラジオ・TV・ネット配信)</span></p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">🎪</div>
-                    <h3>Events</h3>
-                    <p>イベント企画 / 開催</p>
-                </div>
+                <a href="books.html" class="service-link">
+                    <div class="service-card">
+                        <div class="icon">📚</div>
+                        <h3>Books</h3>
+                        <p>書籍制作 / 書籍出版</p>
+                    </div>
+                </a>
+                <a href="broadcast.html" class="service-link">
+                    <div class="service-card">
+                        <div class="icon">📡</div>
+                        <h3>Broadcast</h3>
+                        <p>放送 / 番組制作<br><span class="detail">(ラジオ・TV・ネット配信)</span></p>
+                    </div>
+                </a>
+                <a href="events.html" class="service-link">
+                    <div class="service-card">
+                        <div class="icon">🎪</div>
+                        <h3>Events</h3>
+                        <p>イベント企画 / 開催</p>
+                    </div>
+                </a>
                 <a href="education.html" class="service-link">
                     <div class="service-card">
                         <div class="icon">🌱</div>
@@ -97,11 +115,13 @@
                         <p>プロデュース / 仲介業務</p>
                     </div>
                 </a>
-                <div class="service-card">
-                    <div class="icon">💻</div>
-                    <h3>Platform</h3>
-                    <p>プラットフォーム開発 / 運営</p>
-                </div>
+                <a href="platform.html" class="service-link">
+                    <div class="service-card">
+                        <div class="icon">💻</div>
+                        <h3>Platform</h3>
+                        <p>プラットフォーム開発 / 運営</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -134,41 +154,63 @@
     <section id="contact" class="section contact-section">
         <div class="container">
             <h2 class="section-title">CONTACT</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label>Company Name</label>
-                    <input type="text" placeholder="貴社名（個人の場合は「個人」とご記入ください）">
+            
+            <div class="contact-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 4rem;">
+                <div class="contact-info fade-in">
+                    <h3 style="font-family: var(--font-main); color: var(--accent-color); margin-bottom: 1.5rem;">AUDIO SUBMISSION</h3>
+                    <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.7); line-height: 1.8;">
+                        デモ音源の送付、楽曲制作のご依頼、AIアーティストへの応募などは、下記の専用Googleフォームより受け付けております。<br>
+                        お送りいただいた音源は、担当者が大切に試聴させていただきます。
+                    </p>
+                    <a href="https://forms.gle/naeztrowGt87gPBD9" target="_blank" class="cta-button" style="width: 100%; text-align: center;">Open Google Form</a>
+                    
+                    <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px dashed rgba(0, 242, 255, 0.2);">
+                        <h4 style="font-size: 0.9rem; color: var(--accent-secondary); margin-bottom: 0.5rem;">音源提出時のご注意</h4>
+                        <ul style="font-size: 0.85rem; color: rgba(255,255,255,0.5); padding-left: 1.2rem;">
+                            <li>ファイル形式：MP3, WAV推奨</li>
+                            <li>ファイルサイズ：100MBまで（Googleアカウントが必要です）</li>
+                            <li>URL（Drive/Dropbox等）での提出も可能です</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" placeholder="お名前">
+
+                <div class="contact-form-wrapper fade-in delay-1">
+                    <h3 style="font-family: var(--font-main); color: var(--accent-color); margin-bottom: 1.5rem;">GENERAL INQUIRY</h3>
+                    <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                        取材、業務提携、その他のお問い合わせはこちらのフォームをご利用ください。
+                    </p>
+                    <form class="contact-form" action="https://formspree.io/f/mqaeerle" method="POST">
+                        <!-- ... (existing form fields) ... -->
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" name="company" placeholder="貴社名（個人の場合は「個人」とご記入ください）">
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" placeholder="お名前" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="メールアドレス" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="category" required>
+                                <option value="" disabled selected>お問い合わせ内容を選択してください</option>
+                                <option value="general">一般のお問い合わせ</option>
+                                <option value="press">取材・プレス関係</option>
+                                <option value="partnership">業務提携について</option>
+                                <option value="other">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" placeholder="お問い合わせ内容詳細" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="メールアドレス">
-                </div>
-                <div class="form-group">
-                    <label>Category</label>
-                    <select>
-                        <option value="" disabled selected>お問い合わせ内容を選択してください</option>
-                        <option value="music">音楽制作・出版（AIレーベル・配信代行）</option>
-                        <option value="video">映像制作・出版（PV・MV制作）</option>
-                        <option value="cd">CD・グッズ作成</option>
-                        <option value="event">イベント企画・開催</option>
-                        <option value="education">教育・ワークショップ（AI×療育）</option>
-                        <option value="broadcast">放送・番組制作</option>
-                        <option value="books">書籍制作・出版</option>
-                        <option value="produce">プロデュース・仲介業務</option>
-                        <option value="platform">プラットフォーム開発</option>
-                        <option value="other">その他</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea placeholder="お問い合わせ内容詳細"></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -177,6 +219,7 @@
         <p>&copy; 2026 COEDO MUSIC LABO. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 
