@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Production | COEDO MUSIC LABO</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;700&display=swap"
-        rel="stylesheet">
-    <link rel="icon" href="assets/icons/favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
 </head>
-
 <body>
     <div id="particles-js"></div>
+
     <nav class="navbar">
         <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">COEDO MUSIC LABO</a></div>
         <ul class="nav-links">
@@ -22,6 +21,11 @@
             <li><a href="index.html#works">Works</a></li>
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
 
     <header class="page-header">
@@ -45,7 +49,7 @@
 
             <div class="services-grid" style="margin-top: 4rem;">
                 <div class="service-card">
-                    <div class="icon">🎧</div>
+                    <span class="icon">🎧</span>
                     <h3>AI Music Label</h3>
                     <p>
                         <strong>次世代アーティストの発掘・育成。</strong><br>
@@ -54,7 +58,7 @@
                     </p>
                 </div>
                 <div class="service-card">
-                    <div class="icon">🌍</div>
+                    <span class="icon">🌍</span>
                     <h3>Digital Distribution</h3>
                     <p>
                         <strong>世界180ヶ国以上へ配信。</strong><br>
@@ -63,7 +67,7 @@
                     </p>
                 </div>
                 <div class="service-card">
-                    <div class="icon">💿</div>
+                    <span class="icon">💿</span>
                     <h3>Physical Production</h3>
                     <p>
                         <strong>「モノ」としての音楽を。</strong><br>
@@ -72,7 +76,7 @@
                     </p>
                 </div>
                 <div class="service-card">
-                    <div class="icon">📢</div>
+                    <span class="icon">📢</span>
                     <h3>Promotion</h3>
                     <p>
                         <strong>AI音楽に特化した戦略。</strong><br>
@@ -83,18 +87,20 @@
             </div>
 
             <div style="text-align:center; margin-top: 4rem;">
-                <a href="index.html#contact" class="cta-button">デモ音源の送付はこちら</a>
+                <a href="index.html#contact" class="cta-button">お問い合わせ・音源送付</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>埼玉県ふじみ野市上福岡3-16-10朝日パリオ上福岡703</p>
+        <div class="sns-links">
+            <a href="https://x.com/miya_SUEMYST" target="_blank" class="sns-link">Representative X</a>
+            <a href="https://x.com/CoedoMusicLabo" target="_blank" class="sns-link">Company X</a>
+        </div>
         <p>&copy; 2026 COEDO MUSIC LABO. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>

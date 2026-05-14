@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COEDO MUSIC LABO | Future Media Innovation</title>
-    <meta name="description" content="COEDO MUSIC LABOは、音楽・映像・出版と最新のAI技術を融合させ、次世代のメディア体験を創造するクリエイティブ・ラボです。">
-    <meta name="keywords" content="COEDO MUSIC LABO, 音楽制作, 映像制作, AI, 出版, 療育, 川越, クリエイティブラボ">
-    
-    <!-- OGP -->
-    <meta property="og:title" content="COEDO MUSIC LABO | Future Media Innovation">
-    <meta property="og:description" content="音楽・映像・AIの融合で、新しい価値を創造するクリエイティブ・ラボ">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://myst0518.github.io/coedo_music_labs/">
-    <meta property="og:image" content="https://myst0518.github.io/coedo_music_labs/assets/ogp.png">
-    <meta name="twitter:card" content="summary_large_image">
-
+    <meta name="description" content="音楽・映像・AIの融合で、新しい価値を創造するクリエイティブ・ラボ">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;700&display=swap"
-        rel="stylesheet">
-    <link rel="icon" href="assets/icons/favicon.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
 </head>
-
 <body>
     <div id="particles-js"></div>
+
     <nav class="navbar">
         <div class="logo">COEDO MUSIC LABO</div>
         <ul class="nav-links">
@@ -43,22 +30,21 @@
     </nav>
 
     <header class="hero">
-        <div class="hero-content">
-            <h1 class="fade-in">FUTURE MEDIA<br>INNOVATION</h1>
-            <p class="fade-in delay-1">音楽・映像・AIの融合で、新しい価値を創造するクリエイティブ・ラボ</p>
-            <a href="#contact" class="cta-button fade-in delay-2">Contact Us</a>
-        </div>
         <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Future Media Innovation</h1>
+            <p>音楽・映像・AIの融合で、新しい価値を創造するクリエイティブ・ラボ</p>
+            <a href="#contact" class="cta-button">Contact Us</a>
+        </div>
     </header>
 
     <section id="about" class="section about-section">
         <div class="container">
             <h2 class="section-title">PHILOSOPHY</h2>
-            <p class="about-text">
-                COEDO MUSIC LABOは、既存の枠組みを超えたエンターテインメントを創出します。<br>
-                音楽、映像、出版、そして最新のAI技術。<br>
-                それぞれの領域をクロスオーバーさせ、次世代のメディア体験をプロデュースします。
-            </p>
+            <div class="about-text">
+                <p>COEDO MUSIC LABOは、既存の枠組みを超えたエンターテインメントを創出します。</p>
+                <p>音楽、映像、出版、そして最新のAI技術。それぞれの領域をクロスオーバーさせ、次世代のメディア体験をプロデュースします。</p>
+            </div>
         </div>
     </section>
 
@@ -66,61 +52,47 @@
         <div class="container">
             <h2 class="section-title">SERVICES</h2>
             <div class="services-grid">
-                <a href="music.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">🎵</div>
-                        <h3>Music</h3>
-                        <p>音楽制作 / 音楽出版</p>
-                    </div>
+                <a href="music.html" class="service-card">
+                    <span class="icon">🎵</span>
+                    <h3>Music</h3>
+                    <p>音楽制作 / 音楽出版</p>
                 </a>
-                <a href="video.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">🎬</div>
-                        <h3>Video</h3>
-                        <p>映像制作 / 映像出版</p>
-                    </div>
+                <a href="video.html" class="service-card">
+                    <span class="icon">🎬</span>
+                    <h3>Video</h3>
+                    <p>映像制作 / 映像出版</p>
                 </a>
-                <a href="books.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">📚</div>
-                        <h3>Books</h3>
-                        <p>書籍制作 / 書籍出版</p>
-                    </div>
+                <a href="books.html" class="service-card">
+                    <span class="icon">📚</span>
+                    <h3>Books</h3>
+                    <p>書籍制作 / 書籍出版</p>
                 </a>
-                <a href="broadcast.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">📡</div>
-                        <h3>Broadcast</h3>
-                        <p>放送 / 番組制作<br><span class="detail">(ラジオ・TV・ネット配信)</span></p>
-                    </div>
+                <a href="broadcast.html" class="service-card">
+                    <span class="icon">📡</span>
+                    <h3>Broadcast</h3>
+                    <p>放送 / 番組制作</p>
+                    <span class="detail">(ラジオ・TV・ネット配信)</span>
                 </a>
-                <a href="events.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">🎪</div>
-                        <h3>Events</h3>
-                        <p>イベント企画 / 開催</p>
-                    </div>
+                <a href="events.html" class="service-card">
+                    <span class="icon">🎪</span>
+                    <h3>Events</h3>
+                    <p>イベント企画 / 開催</p>
                 </a>
-                <a href="education.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">🌱</div>
-                        <h3>Education</h3>
-                        <p>教育事業<br><span class="detail">(療育ワークショップ)</span></p>
-                    </div>
+                <a href="education.html" class="service-card">
+                    <span class="icon">🌱</span>
+                    <h3>Education</h3>
+                    <p>教育事業</p>
+                    <span class="detail">(療育ワークショップ)</span>
                 </a>
-                <a href="produce.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">🤝</div>
-                        <h3>Produce</h3>
-                        <p>プロデュース / 仲介業務</p>
-                    </div>
+                <a href="produce.html" class="service-card">
+                    <span class="icon">🤝</span>
+                    <h3>Produce</h3>
+                    <p>プロデュース / 仲介業務</p>
                 </a>
-                <a href="platform.html" class="service-link">
-                    <div class="service-card">
-                        <div class="icon">💻</div>
-                        <h3>Platform</h3>
-                        <p>プラットフォーム開発 / 運営</p>
-                    </div>
+                <a href="platform.html" class="service-card">
+                    <span class="icon">💻</span>
+                    <h3>Platform</h3>
+                    <p>プラットフォーム開発 / 運営</p>
                 </a>
             </div>
         </div>
@@ -128,24 +100,36 @@
 
     <section id="works" class="section works-section">
         <div class="container">
-            <h2 class="section-title">CASE STUDY</h2>
-            <div class="case-card fade-in">
-                <div class="case-content">
-                    <span class="case-tag">Regional Revitalization × AI</span>
-                    <h3>地方創生 川越×AI 動画コンペ</h3>
-                    <p>
-                        埼玉県川越市を舞台に、生成AIを活用したプロモーション動画コンテストを開催。<br>
-                        最新技術と歴史ある街並みの融合により、新しい観光PRの形を提示しました。
-                    </p>
-                    <div class="case-actions">
-                        <a href="https://myst0518.github.io/kawagoe-ai-awards/" target="_blank" class="text-link">View
-                            Project →</a>
+            <h2 class="section-title">WORKS</h2>
+            <div class="works-grid">
+                <!-- Mina Gakuin -->
+                <div class="case-card">
+                    <div class="case-content">
+                        <span class="case-tag">Educational Workshop</span>
+                        <h3>美菜学院 × AI音楽ワークショップ</h3>
+                        <p>「話すのが苦手な子が30秒で自分の歌を作った日」。AIツールを活用し、子供たちの想いを言葉から音楽へと変える新しい表現体験を提供しました。</p>
+                        <a href="https://note.com/sue_myst/n/neff0dc1d89af" target="_blank" class="text-link">Read More →</a>
                     </div>
                 </div>
-                <div class="case-cta-box">
-                    <h4>自治体・観光協会の皆様へ</h4>
-                    <p>AIを活用した低コストかつ高品質なプロモーション施策をご提案します。</p>
-                    <a href="#contact" class="cta-button small">お問い合わせはこちら</a>
+
+                <!-- Mother's Day -->
+                <div class="case-card">
+                    <div class="case-content">
+                        <span class="case-tag">Seasonal Event</span>
+                        <h3>母の日に「ありがとう」を贈るソングカード</h3>
+                        <p>生成AI音楽を使用し、お母さんへの感謝を込めたオリジナル曲を制作。スマホでいつでも聴けるデジタルメッセージカードとして形にしました。</p>
+                        <a href="https://x.com/miya_SUEMYST/status/2044732547616346160" target="_blank" class="text-link">View Post →</a>
+                    </div>
+                </div>
+
+                <!-- Kawagoe AI -->
+                <div class="case-card">
+                    <div class="case-content">
+                        <span class="case-tag">Regional Promotion</span>
+                        <h3>川越AIプロモーションコンテスト</h3>
+                        <p>埼玉県川越市を舞台に、生成AIを活用したプロモーション動画コンテストを開催。最新技術と歴史ある街並みの融合により、新しい観光PRの形を提示しました。</p>
+                        <a href="https://myst0518.github.io/kawagoe-ai-awards/" target="_blank" class="text-link">View Project →</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,82 +139,47 @@
         <div class="container">
             <h2 class="section-title">CONTACT</h2>
             
-            <div class="contact-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 4rem;">
-                <div class="contact-info fade-in">
-                    <h3 style="font-family: var(--font-main); color: var(--accent-color); margin-bottom: 1.5rem;">AUDIO SUBMISSION</h3>
-                    <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.7); line-height: 1.8;">
-                        デモ音源の送付、楽曲制作のご依頼、AIアーティストへの応募などは、下記の専用Googleフォームより受け付けております。<br>
-                        お送りいただいた音源は、担当者が大切に試聴させていただきます。
-                    </p>
-                    <a href="https://forms.gle/naeztrowGt87gPBD9" target="_blank" class="cta-button" style="width: 100%; text-align: center;">Open Google Form</a>
-                    
-                    <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px dashed rgba(0, 242, 255, 0.2);">
-                        <h4 style="font-size: 0.9rem; color: var(--accent-secondary); margin-bottom: 0.5rem;">音源提出時のご注意</h4>
-                        <ul style="font-size: 0.85rem; color: rgba(255,255,255,0.5); padding-left: 1.2rem;">
-                            <li>ファイル形式：MP3, WAV推奨</li>
-                            <li>ファイルサイズ：100MBまで（Googleアカウントが必要です）</li>
-                            <li>URL（Drive/Dropbox等）での提出も可能です</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="contact-form-wrapper fade-in delay-1">
-                    <h3 style="font-family: var(--font-main); color: var(--accent-color); margin-bottom: 1.5rem;">GENERAL INQUIRY</h3>
-                    <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
-                        取材、業務提携、その他のお問い合わせはこちらのフォームをご利用ください。
-                    </p>
-                    <form class="contact-form" action="https://formspree.io/f/mqaeerle" method="POST">
-                        <!-- ... (existing form fields) ... -->
-                        <div class="form-group">
-                            <label>Company Name</label>
-                            <input type="text" name="company" placeholder="貴社名（個人の場合は「個人」とご記入ください）">
-                        </div>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" placeholder="お名前" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" placeholder="メールアドレス" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Category</label>
-                            <select name="category" required>
-                                <option value="" disabled selected>お問い合わせ内容を選択してください</option>
-                                <option value="general">一般のお問い合わせ</option>
-                                <option value="press">取材・プレス関係</option>
-                                <option value="partnership">業務提携について</option>
-                                <option value="other">その他</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" placeholder="お問い合わせ内容詳細" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">Send Message</button>
-                    </form>
-                </div>
+            <div class="case-cta-box fade-in">
+                <h4>AUDIO SUBMISSION</h4>
+                <p>デモ音源の送付、楽曲制作のご依頼、AIアーティストへの応募などはこちら。</p>
+                <a href="https://forms.gle/naeztrowGt87gPBD9" target="_blank" class="cta-button small">Open Google Form</a>
             </div>
+
+            <form class="contact-form fade-in" action="https://formspree.io/f/your-id" method="POST">
+                <div class="form-group">
+                    <label>Inquiry Type</label>
+                    <select name="type">
+                        <option value="general">一般お問い合わせ</option>
+                        <option value="business">業務提携 / 取材</option>
+                        <option value="workshop">ワークショップ開催依頼</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" required placeholder="お名前">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required placeholder="メールアドレス">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" required placeholder="メッセージを入力してください"></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
         </div>
-    
-<div class="location-info" style="margin-top: 5rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5rem;">
-    <h3 style="font-family: 'Inter', sans-serif; color: #ff00d4; margin-bottom: 2rem; font-size: 1.8rem; letter-spacing: 0.2em;">LOCATION</h3>
-    <p style="margin-bottom: 3rem; color: #fff; font-size: 1.1rem; line-height: 1.8;">
-        埼玉県ふじみ野市上福岡3-16-10朝日パリオ上福岡703
-    </p>
-    <div class="map-container" style="max-width: 900px; margin: 0 auto; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.812239402517!2d139.5126662!3d35.8781206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018de921769611f%3A0xc33391789c565f4d!2z44CSMzU2LTAwMDQg5Z-8546J55yM44G144GY44G_6YeO5biC5LiK56aP5bKh77yT5LiB55uu77yR77yW4oiS77yR77yQIOacneS6pOODkeODquOCquS4iuemj-WKhzcwMw!5e0!3m2!1sja!2sjp!4v1715403000000!5m2!1sja!2sjp" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-</div>
-</section>
+    </section>
 
     <footer>
-        <p>埼玉県ふじみ野市上福岡3-16-10朝日パリオ上福岡703</p>
+        <div class="sns-links">
+            <a href="https://x.com/miya_SUEMYST" target="_blank" class="sns-link">Representative X</a>
+            <a href="https://x.com/CoedoMusicLabo" target="_blank" class="sns-link">Company X</a>
+        </div>
         <p>&copy; 2026 COEDO MUSIC LABO. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>
