@@ -1,179 +1,1644 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COEDO MUSIC LABO | Connecting Media Layers</title>
-    <meta name="description" content="音楽・映像・AIの融合で人と人を繋ぐ架け橋に">
-    <link rel="stylesheet" href="style.css">
+    <title>株式会社Coedo Music Labo | 公式コーポレートサイト</title>
+    <meta name="description" content="株式会社Coedo Music Laboは、川越の街並みのように古き良き情緒を大切にしながら、AI技術で未来 of 音楽を奏で、人と人を繋ぐ架け橋となる会社です。">
+    
+    <!-- Tailwind CSS & Custom Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coedo: {
+                            sumi: '#ffffff',       /* ベースカラー：クリーンなピュアホワイト */
+                            sumiLight: '#f8fafc',  /* カード等：爽やかなごく明るいオフホワイト */
+                            ai: '#f0f9ff',         /* AI先進性を表す爽快なスカイブルー */
+                            aiLight: '#e0f2fe',    /* スカイブルーのハイライト */
+                            cyber: '#0284c7',      /* メインカラー：信頼感ある明るいコバルトブルー */
+                            cyberDark: '#0369a1',
+                            wood: '#b45309',       /* アクセント：小江戸の温かみをプラスする明るい木目調のベージュ/アンバー */
+                            woodLight: '#d97706'   /* 木目調アンバーのハイライト */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                        mincho: ['Shippori Mincho', 'Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Scrollbar & Utility Styles -->
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+        .card-glow:hover {
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.08);
+        }
+        .border-glow:focus {
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+        
+        /* Interactive Album Jacket Equalizer animations */
+        @keyframes ani-bar-1 { 0%, 100% { height: 20%; } 50% { height: 90%; } }
+        @keyframes ani-bar-2 { 0%, 100% { height: 40%; } 50% { height: 100%; } }
+        @keyframes ani-bar-3 { 0%, 100% { height: 30%; } 50% { height: 80%; } }
+        @keyframes ani-bar-4 { 0%, 100% { height: 50%; } 50% { height: 95%; } }
+        @keyframes ani-bar-5 { 0%, 100% { height: 15%; } 50% { height: 85%; } }
+        
+        .ani-bar-1 { animation: ani-bar-1 1s ease-in-out infinite; }
+        .ani-bar-2 { animation: ani-bar-2 0.8s ease-in-out infinite; }
+        .ani-bar-3 { animation: ani-bar-3 1.2s ease-in-out infinite; }
+        .ani-bar-4 { animation: ani-bar-4 0.9s ease-in-out infinite; }
+        .ani-bar-5 { animation: ani-bar-5 1.1s ease-in-out infinite; }
+        
+        /* Custom styled Range Inputs for volume slider */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #0284c7;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(2, 132, 199, 0.25);
+        }
+    </style>
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
-<body>
-    <div id="particles-js"></div>
+<body class="bg-slate-50 text-slate-700 font-sans antialiased overflow-x-hidden">
 
-    <nav class="navbar">
-        <div class="logo">COEDO MUSIC LABO</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#works">Works</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- background glows -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-coedo-cyber/5 blur-[120px]"></div>
+        <div class="absolute bottom-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-coedo-wood/5 blur-[150px]"></div>
+        <div class="absolute top-[40%] right-[10%] w-[40%] h-[40%] rounded-full bg-coedo-cyber/3 blur-[100px]"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/80 border-b border-slate-200/50 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 group">
+                <img src="assets/images/logo_transparent_cropped.png" alt="Coedo Music Labo" class="h-12 sm:h-14 w-auto object-contain group-hover:opacity-80 transition-opacity drop-shadow-sm">
+            </a>
+            
+            <!-- Desktop Links -->
+            <ul class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wider text-slate-600">
+                <li><a href="#greeting" class="hover:text-coedo-cyber transition-colors py-2">ご挨拶</a></li>
+                <li><a href="#services" class="hover:text-coedo-cyber transition-colors py-2">事業内容</a></li>
+                <li><a href="#works" class="hover:text-coedo-cyber transition-colors py-2">実績</a></li>
+                <li><a href="#audio-showcase" class="hover:text-coedo-cyber transition-colors py-2">体験ギャラリー</a></li>
+                <li><a href="#faq" class="hover:text-coedo-cyber transition-colors py-2">よくあるご質問</a></li>
+                <li><a href="#profile" class="hover:text-coedo-cyber transition-colors py-2">会社概要</a></li>
+                <li><a href="#contact" class="px-5 py-2.5 bg-coedo-cyber hover:bg-coedo-cyberDark text-white rounded-full transition-all duration-300 hover:scale-105 shadow-sm shadow-coedo-cyber/20 font-bold">お問い合わせ</a></li>
+            </ul>
+
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-slate-700 hover:text-coedo-cyber transition-colors focus:outline-none" id="menu-btn" aria-label="Toggle Menu">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden absolute top-20 left-0 w-full bg-white/98 backdrop-blur-lg border-b border-slate-200 shadow-xl px-8 py-6 transition-all duration-300" id="mobile-menu">
+            <ul class="flex flex-col gap-5 text-base font-medium tracking-wide">
+                <li><a href="#greeting" class="block text-slate-700 hover:text-coedo-cyber transition-colors py-1">ご挨拶</a></li>
+                <li><a href="#services" class="block text-slate-700 hover:text-coedo-cyber transition-colors py-1">事業内容</a></li>
+                <li><a href="#works" class="block text-slate-700 hover:text-coedo-cyber transition-colors py-1">実績</a></li>
+                <li><a href="#audio-showcase" class="block text-slate-700 hover:text-coedo-cyber transition-colors py-1">体験ギャラリー</a></li>
+                <li><a href="#faq" class="block text-slate-700 hover:text-coedo-cyber transition-colors py-1">よくあるご質問</a></li>
+                <li><a href="#profile" class="block text-slate-700 hover:text-coedo-cyber transition-colors py-1">会社概要</a></li>
+                <li><a href="#contact" class="block text-center py-3 bg-coedo-cyber text-white font-bold rounded-lg transition-all">お問い合わせ</a></li>
+            </ul>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 id="hero-title">Coedo Music Labo</h1>
-            <p>音楽・映像・AIの融合で人と人を繋ぐ架け橋に</p>
-            <a href="#contact" class="cta-button">Contact Us</a>
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-coedo-ai via-white to-white">
+        <!-- Grid overlay -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#00000003_1px,transparent_1px),linear-gradient(to_bottom,#00000003_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+
+        <div class="relative max-w-5xl mx-auto px-6 text-center z-10 py-16">
+            <!-- Hero Logo -->
+            <div class="flex justify-center mb-6">
+                <img src="assets/images/logo_transparent_cropped.png" alt="Coedo Music Labo" class="w-[340px] sm:w-[420px] md:w-[520px] max-w-full h-auto object-contain drop-shadow-md">
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200/50 mb-8 animate-fade-in">
+                <span class="w-2 h-2 rounded-full bg-coedo-cyber animate-pulse"></span>
+                <span class="text-xs sm:text-sm font-semibold tracking-widest text-coedo-wood">AI × 音楽の新たな可能性</span>
+            </div>
+            
+            <h1 class="font-mincho text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[2px] sm:tracking-[3px] leading-snug text-slate-900 mb-8">
+                <span class="block">AIを、誰もが人生を彩るための</span>
+                <span class="block bg-gradient-to-r from-coedo-cyber via-slate-800 to-coedo-wood bg-clip-text text-transparent">「共通言語」へ。</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-slate-700 font-light leading-relaxed mb-12">
+                株式会社Coedo Music Labo は、川越の街並みのように古き良き情緒を大切にしながら、新しい技術（AI）で未来の音楽を奏でる会社です。
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                <a href="#greeting" class="px-8 py-4 bg-gradient-to-r from-coedo-cyber to-coedo-cyberDark hover:from-coedo-cyberDark hover:to-coedo-cyber text-white font-extrabold tracking-wider rounded-full shadow-lg shadow-coedo-cyber/20 hover:shadow-coedo-cyber/30 hover:scale-105 transition-all duration-300 w-full sm:w-auto text-center">
+                    企業理念・挨拶を読む
+                </a>
+                <a href="#contact" class="px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-bold tracking-wider rounded-full hover:scale-105 transition-all duration-300 w-full sm:w-auto text-center">
+                    お問い合わせ
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 hover:text-coedo-cyber transition-colors cursor-pointer">
+            <span class="text-xs tracking-[4px] uppercase font-semibold">Scroll</span>
+            <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
         </div>
     </header>
 
-    <section id="about" class="section about-section">
-        <div class="container">
-            <h2 class="section-title">PHILOSOPHY</h2>
-            <div class="about-text">
-                <p>COEDO MUSIC LABOは、既存の枠組みを超えたエンターテインメントを創出します。</p>
-                <p>音楽、映像、出版、そして最新のAI技術。それぞれの領域をクロスオーバーさせ、次世代のメディア体験をプロデュースします。</p>
+    <!-- Greeting Section -->
+    <section id="greeting" class="py-24 sm:py-32 relative border-t border-slate-200 bg-gradient-to-b from-white to-slate-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs sm:text-sm font-extrabold tracking-[6px] text-coedo-cyber uppercase block mb-3">GREETING</span>
+                <h2 class="font-mincho text-3xl sm:text-4xl font-bold text-slate-900 tracking-[2px]">設立のご挨拶</h2>
+                <div class="w-12 h-[3px] bg-gradient-to-r from-coedo-cyber to-coedo-wood mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <!-- Collapsible Greeting Wrapper -->
+            <div id="greeting-wrapper" class="relative overflow-hidden transition-all duration-700 ease-in-out max-h-[300px]">
+                <div class="prose prose-lg text-slate-700 font-light leading-loose space-y-8 max-w-none pb-20">
+                    <p>
+                        この度、<strong class="font-bold text-slate-900">株式会社Coedo Music Labo</strong>を設立いたしました。<br>
+                        私がAI音楽を発信している川越の通称「小江戸」を頭に冠し、これからAI音楽を中心にした活動をして参ります。
+                    </p>
+
+                    <p>
+                        私が担当しているラジオ川越の番組「モーニング・ミスト」では、2025年4月の開始当初からAI音楽を取り入れてきました。生放送中に音楽を生成して流したり、リスナーさんの「テーマソングを作ってほしい」というご要望に応えたりと、AI音楽を世の中に伝える発信を続けてきました。
+                    </p>
+
+                    <p>
+                        同年6月からは、生成AI音楽アーティストコミュニティの皆さんの楽曲を紹介するコーナー「Chain Stream（通称：チェンスト）」を開始。10月からはAI音楽のみを30分間DJプレイする「AI Sound Cypher」を金曜夜にスタートし、多くのアーティストの方々に楽曲提供をいただく場となっていました（放送終了）。
+                    </p>
+
+                    <p>
+                        この度、大変ありがたいことに、個人出資という形で活動資金のご提案をいただきました。私たちはこの資金を大切に活用し、AI音楽を通じた『社会の幸福実現』のために邁進して参ります。
+                    </p>
+
+                    <p>
+                        株式会社である以上、本来は利益を追求すべき存在です。しかし、今回の設立にあたっては<strong class="font-bold text-coedo-cyber">「AI音楽でいかに儲けるか」よりも先に、まずは一企業としてAI音楽クリエイターの皆様と真摯に向き合い、確かな「社会貢献」を積み上げていく</strong>。それが私たちの最優先事項です。
+                    </p>
+                    
+                    <p>
+                        「それなら一般社団法人でも良いのでは？」という声もありましたが、活動が成長した未来に、よりダイナミックで自由な選択ができるよう、あえて「株式会社」という器を選びました。
+                    </p>
+
+                    <p class="font-mincho text-slate-900 text-lg sm:text-xl font-semibold border-b border-slate-200 pb-2 mt-12">
+                        「AI音楽には、世界を少しだけ優しく変える力がある」という確信
+                    </p>
+
+                    <p>
+                        「AI音楽とは何か」。私は常に問い続けています。<br>
+                        技術の進歩ゆえのネガティブな側面で語られることもありますが、その一方で、「<span class="text-coedo-wood">音楽を一度諦めた人が、もう一度向き合えた</span>」「<span class="text-coedo-wood">自分の詩に曲がついた</span>」「<span class="text-coedo-wood">ラジオで自分の曲が流れた</span>」といった、数々の希望も生み出してしてきました。
+                    </p>
+
+                    <p>
+                        私たちが考えるAI音楽は、「<strong class="font-bold text-slate-900">人と人をつなぐ架け橋</strong>」です。<br>
+                        先日も、ラジオで「捨て猫を拾ってミヤと名付けた」というエピソードと共に、その猫への想いをAIで形にした曲を紹介したところ、リスナーさん同士で温かな交流が生まれました。心を通わせるきっかけを作ってくれたのは、紛れもなくAIでした。
+                    </p>
+
+                    <p>
+                        これまで、支援が必要な生徒さんや、クリエイターを目指す学生、大切な人へ感謝を届けたい方々へ向けたワークショップを行ってきました。そこで生まれるのは、ヒットチャートの1位を目指すものではない、極めて「<strong class="font-bold text-slate-900">超個人的な曲</strong>」です。一曲一曲に宿る物語を、私たちは大切にしたいと考えています。
+                    </p>
+
+                    <p>
+                        守るべきものを最小限に、攻めるべき未来を最大限に見据え、この挑戦にすべてを賭けてみたいと思います。これから始まる新しいライブを、どうぞ一緒に楽しんでください。
+                    </p>
+
+                    <div class="pt-10 flex flex-col items-end">
+                        <span class="text-slate-600 text-sm tracking-widest font-semibold uppercase">Representative Director</span>
+                        <span class="font-mincho text-2xl sm:text-3xl font-extrabold text-slate-800 mt-2 tracking-[4px]">代表取締役　宮下　晋(miya)</span>
+                    </div>
+                </div>
+
+                <!-- Gradient Fade Overlay -->
+                <div id="greeting-fade" class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent pointer-events-none transition-opacity duration-300"></div>
+            </div>
+
+            <!-- Toggle Button -->
+            <div class="text-center mt-8 relative z-20">
+                <button id="greeting-toggle-btn" class="px-8 py-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-coedo-cyber/30 rounded-full text-sm font-semibold tracking-wider text-slate-700 hover:text-slate-900 transition-all duration-300 inline-flex items-center gap-2 group">
+                    <span id="greeting-toggle-text">全文を読む</span>
+                    <svg id="greeting-toggle-icon" class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
 
-    <section id="services" class="section services-section">
-        <div class="container">
-            <h2 class="section-title">SERVICES</h2>
-            <div class="services-grid">
-                <a href="music.html" class="service-card">
-                    <span class="icon">🎵</span>
-                    <h3>Music</h3>
-                    <p>音楽制作 / 音楽出版</p>
-                </a>
-                <a href="video.html" class="service-card">
-                    <span class="icon">🎬</span>
-                    <h3>Video</h3>
-                    <p>映像制作 / 映像出版</p>
-                </a>
-                <a href="books.html" class="service-card">
-                    <span class="icon">📚</span>
-                    <h3>Books</h3>
-                    <p>書籍制作 / 書籍出版</p>
-                </a>
-                <a href="broadcast.html" class="service-card">
-                    <span class="icon">📡</span>
-                    <h3>Broadcast</h3>
-                    <p>放送 / 番組制作</p>
-                    <span class="detail">(ラジオ・TV・ネット配信)</span>
-                </a>
-                <a href="events.html" class="service-card">
-                    <span class="icon">🎪</span>
-                    <h3>Events</h3>
-                    <p>イベント企画 / 開催</p>
-                </a>
-                <a href="education.html" class="service-card">
-                    <span class="icon">🌱</span>
-                    <h3>Education</h3>
-                    <p>教育事業</p>
-                    <span class="detail">(療育ワークショップ)</span>
-                </a>
-                <a href="produce.html" class="service-card">
-                    <span class="icon">🤝</span>
-                    <h3>Produce</h3>
-                    <p>プロデュース / 仲介業務</p>
-                </a>
-                <a href="platform.html" class="service-card">
-                    <span class="icon">💻</span>
-                    <h3>Platform</h3>
-                    <p>プラットフォーム開発 / 運営</p>
-                </a>
+    <!-- Services Section -->
+    <section id="services" class="py-24 sm:py-32 relative border-t border-slate-200 bg-gradient-to-b from-coedo-sumiLight to-coedo-sumi">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <span class="text-xs sm:text-sm font-extrabold tracking-[6px] text-coedo-cyber uppercase block mb-3">SERVICES</span>
+                <h2 class="font-mincho text-3xl sm:text-4xl font-bold text-slate-900 tracking-[2px]">事業内容</h2>
+                <div class="w-12 h-[3px] bg-gradient-to-r from-coedo-cyber to-coedo-wood mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10">
+                
+                <!-- Service 1: 体験・教育 -->
+                <div class="group relative rounded-2xl bg-gradient-to-b from-slate-50/50 to-transparent border border-slate-200/60 hover:border-coedo-cyber/50 p-8 sm:p-10 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-2">
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-coedo-cyber/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-coedo-cyber/10 flex items-center justify-center text-coedo-cyber mb-8 group-hover:scale-110 transition-transform duration-300">
+                            <!-- SVG Icon: Education / Workshop / Hat -->
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-bold text-coedo-wood tracking-[4px] uppercase block mb-2">01. AI Workshop & Literacy</span>
+                        <h3 class="font-mincho text-xl sm:text-2xl font-bold text-slate-900 mb-5">体験・教育</h3>
+                        <p class="text-sm sm:text-base text-slate-700 font-light leading-relaxed">
+                            地域の学童保育、教育機関、商業施設と連携し、子どもから大人までを対象とした「AI音楽体験ワークショップ」を企画・運営。ただ技術に触れるだけでなく、これからの時代に必須となる「AIのリテラシー教育」をセットで提供し、次世代の創造力を育みます。
+                        </p>
+
+                        <!-- Workshop Link inside Service Card -->
+                        <div class="mt-6 pt-6 border-t border-slate-200 space-y-3">
+                            <div class="rounded-xl border border-slate-200 bg-white p-4 flex flex-col justify-between hover:border-coedo-cyber/20 transition-all duration-300 relative overflow-hidden group/ws">
+                                <div class="absolute -top-10 -right-10 w-20 h-20 bg-coedo-cyber/5 rounded-full blur-xl pointer-events-none group-hover/ws:bg-coedo-cyber/10 transition-colors"></div>
+                                <div class="mb-3">
+                                    <h4 class="text-slate-800 font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-coedo-cyber animate-pulse"></span>
+                                        美菜学院おんがくワークショップ
+                                    </h4>
+                                    <p class="text-[10px] text-slate-700 font-light leading-relaxed mt-1">
+                                        美菜学院にて開催されたAI音楽ワークショップの様子や、子どもたちの瑞々しい感性が表現された生徒さんの作品・感想をご紹介しています。
+                                    </p>
+                                </div>
+                                <a href="https://note.com/sue_myst/n/neff0dc1d89af" target="_blank" class="w-full text-center py-2 bg-coedo-cyber/10 hover:bg-coedo-cyber text-coedo-cyber hover:text-white border border-coedo-cyber/20 hover:border-transparent rounded-lg font-bold text-[10px] transition-all duration-300">
+                                    活動報告（Note）を読む / 詳細を見る
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-8 h-[2px] bg-coedo-cyber mt-8 group-hover:w-full transition-all duration-300"></div>
+                </div>
+
+                <!-- Service 2: 発信・プロデュース -->
+                <div class="group relative rounded-2xl bg-gradient-to-b from-slate-50/50 to-transparent border border-slate-200/60 hover:border-coedo-wood/50 p-8 sm:p-10 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-2">
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-coedo-wood/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-coedo-wood/10 flex items-center justify-center text-coedo-wood mb-8 group-hover:scale-110 transition-transform duration-300">
+                            <!-- SVG Icon: Mic / Radio / Media -->
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-bold text-coedo-wood tracking-[4px] uppercase block mb-2">02. Media & Production</span>
+                        <h3 class="font-mincho text-xl sm:text-2xl font-bold text-slate-900 mb-5">発信・プロデュース</h3>
+                        <p class="text-sm sm:text-base text-slate-700 font-light leading-relaxed">
+                            ラジオ番組（『モーニング・ミスト』『Chain Stream』『AI Sound Cypher』等 ※放送終了）の制作やイベントを通じ、AI音楽に込められた「超個人的な物語」を社会へ届ける場を広げます。
+                        </p>
+
+                        <!-- Program Links inside Service Card -->
+                        <div class="mt-6 pt-6 border-t border-slate-200 space-y-3">
+                            <!-- Program 1 Link -->
+                            <div class="rounded-xl border border-slate-200 bg-white p-4 flex flex-col justify-between hover:border-coedo-cyber/20 transition-all duration-300 relative overflow-hidden group/p1">
+                                <div class="absolute -top-10 -right-10 w-20 h-20 bg-coedo-cyber/5 rounded-full blur-xl pointer-events-none group-hover/p1:bg-coedo-cyber/10 transition-colors"></div>
+                                <div class="mb-3">
+                                    <h4 class="text-slate-800 font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                        モーニング・ミスト
+                                    </h4>
+                                    <p class="text-[10px] text-slate-700 font-light leading-relaxed mt-1">
+                                        毎週金曜 朝7:00〜8:55 生放送。2025年4月の開始当初からAI音楽を取り入れ、生放送中の音楽生成などを行った看板番組（2026年6月放送終了）。
+                                    </p>
+                                </div>
+                                <div class="w-full text-center py-2 bg-slate-100 text-slate-400 border border-slate-200/50 rounded-lg font-bold text-[10px]">
+                                    放送終了（2025年4月〜2026年6月）
+                                </div>
+                            </div>
+
+                            <!-- Program 2 Link -->
+                            <div class="rounded-xl border border-slate-200 bg-white p-4 flex flex-col justify-between hover:border-coedo-wood/20 transition-all duration-300 relative overflow-hidden group/p2">
+                                <div class="absolute -top-10 -right-10 w-20 h-20 bg-coedo-wood/5 rounded-full blur-xl pointer-events-none group-hover/p2:bg-coedo-wood/10 transition-colors"></div>
+                                <div class="mb-3">
+                                    <h4 class="text-slate-800 font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                        AI Sound Cypher
+                                    </h4>
+                                    <p class="text-[10px] text-slate-700 font-light leading-relaxed mt-1">
+                                        毎週金曜 夜21:00〜21:30 放送。AI音楽のみを30分間DJプレイした特化型番組（2026年6月放送終了）。
+                                    </p>
+                                </div>
+                                <div class="w-full text-center py-2 bg-slate-100 text-slate-400 border border-slate-200/50 rounded-lg font-bold text-[10px]">
+                                    放送終了（2025年10月〜2026年6月）
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-8 h-[2px] bg-coedo-wood mt-8 group-hover:w-full transition-all duration-300"></div>
+                </div>
+
+                <!-- Service 3: 繋がる・守る -->
+                <div class="group relative rounded-2xl bg-gradient-to-b from-slate-50/50 to-transparent border border-slate-200/60 hover:border-coedo-cyber/50 p-8 sm:p-10 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-2">
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-coedo-cyber/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-coedo-cyber/10 flex items-center justify-center text-coedo-cyber mb-8 group-hover:scale-110 transition-transform duration-300">
+                            <!-- SVG Icon: Support / Community / Connections -->
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-bold text-coedo-wood tracking-[4px] uppercase block mb-2">03. Community & Support</span>
+                        <h3 class="font-mincho text-xl sm:text-2xl font-bold text-slate-900 mb-5">繋がる・守る</h3>
+                        <p class="text-sm sm:text-base text-slate-700 font-light leading-relaxed">
+                            クリエイターとリスナー、地域とテクノロジーが交差する温かなコミュニティを醸成。また、AIやSNSを安心・安全に活用できるよう、クリエイターや一般の方からのトラブル・著作権等のご相談窓口を運営し、社会貢献に努めます。
+                        </p>
+
+                        <!-- Support Links inside Service Card -->
+                        <div class="mt-6 pt-6 border-t border-slate-200 space-y-3">
+                            <!-- Link 1 to showcase -->
+                            <div class="rounded-xl border border-slate-200 bg-white p-4 flex flex-col justify-between hover:border-coedo-cyber/20 transition-all duration-300 relative overflow-hidden group/sp1">
+                                <div class="absolute -top-10 -right-10 w-20 h-20 bg-coedo-cyber/5 rounded-full blur-xl pointer-events-none group-hover/sp1:bg-coedo-cyber/10 transition-colors"></div>
+                                <div class="mb-3">
+                                    <h4 class="text-slate-800 font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-coedo-cyber"></span>
+                                        AI音楽体験ギャラリー
+                                    </h4>
+                                    <p class="text-[10px] text-slate-700 font-light leading-relaxed mt-1">
+                                        クリエイターやワークショップ参加者の子どもたちが手掛けた、多彩なAIサウンドの数々を今すぐお聴きいただけます。
+                                    </p>
+                                </div>
+                                <a href="#audio-showcase" class="w-full text-center py-2 bg-coedo-cyber/10 hover:bg-coedo-cyber text-coedo-cyber hover:text-white border border-coedo-cyber/20 hover:border-transparent rounded-lg font-bold text-[10px] transition-all duration-300">
+                                    ギャラリーへ移動 / 音源を聴く
+                                </a>
+                            </div>
+
+                            <!-- Link 2 to contact -->
+                            <div class="rounded-xl border border-slate-200 bg-white p-4 flex flex-col justify-between hover:border-coedo-wood/20 transition-all duration-300 relative overflow-hidden group/sp2">
+                                <div class="absolute -top-10 -right-10 w-20 h-20 bg-coedo-wood/5 rounded-full blur-xl pointer-events-none group-hover/sp2:bg-coedo-wood/10 transition-colors"></div>
+                                <div class="mb-3">
+                                    <h4 class="text-slate-800 font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-coedo-wood"></span>
+                                        ご相談・お問い合わせ
+                                    </h4>
+                                    <p class="text-[10px] text-slate-700 font-light leading-relaxed mt-1">
+                                        AI著作権やSNS上のトラブルに関する個人でのご相談、協賛・後援のご依頼などはこちらからお気軽に。一企業として真摯にサポートします。
+                                    </p>
+                                </div>
+                                <a href="#contact" class="w-full text-center py-2 bg-coedo-wood/10 hover:bg-coedo-wood text-coedo-wood hover:text-white border border-coedo-wood/20 hover:border-transparent rounded-lg font-bold text-[10px] transition-all duration-300">
+                                    問い合わせフォームへ / ご相談はこちら
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-8 h-[2px] bg-coedo-cyber mt-8 group-hover:w-full transition-all duration-300"></div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="works" class="section works-section">
-        <div class="container">
-            <h2 class="section-title">WORKS</h2>
-            <div class="works-grid">
-                <div class="case-card">
-                    <div class="case-content">
-                        <span class="case-tag">Educational Workshop</span>
-                        <h3>美菜学院 × AI音楽ワークショップ</h3>
-                        <p>「話すのが苦手な子が30秒で自分の歌を作った日」。AIツールを活用し、子供たちの想いを言葉から音楽へと変える新しい表現体験を提供しました。</p>
-                        <a href="https://note.com/sue_myst/n/neff0dc1d89af" target="_blank" class="text-link">Read More →</a>
+    <!-- AI Music Showcase Section -->
+    <section id="audio-showcase" class="py-24 sm:py-32 relative border-t border-slate-200 bg-gradient-to-b from-coedo-sumiLight to-coedo-sumi">
+        <!-- Decorative glowing orb -->
+        <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-coedo-cyber/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-coedo-wood/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-xs sm:text-sm font-extrabold tracking-[6px] text-coedo-cyber uppercase block mb-3">AI SOUND GALLERY</span>
+                <h2 class="font-mincho text-3xl sm:text-4xl font-bold text-slate-900 tracking-[2px]">AI音楽体験ギャラリー</h2>
+                <div class="w-12 h-[3px] bg-gradient-to-r from-coedo-cyber to-coedo-wood mx-auto mt-6 rounded-full"></div>
+                <p class="text-slate-600 mt-6 text-sm sm:text-base font-light max-w-2xl mx-auto leading-relaxed text-left">
+                    Coedo Music Laboが企画し、クリエイターが手掛けた多彩なAIサウンドをその場でお楽しみいただけます。実際の店舗への導入も想定して作られた、最先端テクノロジーが織りなす美しいハーモニーをぜひご体感ください。
+                </p>
+            </div>
+
+            <!-- Showcase Player Wrapper -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Left: Interactive Player Card (Liner Notes Mode) -->
+                <div class="lg:col-span-5 rounded-2xl bg-white border border-slate-200 p-8 shadow-sm flex flex-col justify-between relative overflow-hidden backdrop-blur-md min-h-[480px]">
+                    <!-- Glowing border effect -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-coedo-cyber/5 via-transparent to-coedo-wood/5 opacity-50 pointer-events-none"></div>
+
+                    <!-- Liner Notes Content Container -->
+                    <div class="relative z-10 flex-1 flex flex-col justify-between mb-8">
+                        <div>
+                            <!-- Category Badge -->
+                            <div class="flex items-center justify-between mb-6">
+                                <span id="current-track-badge" class="inline-block bg-gradient-to-r from-coedo-cyber/10 to-coedo-wood/10 text-coedo-cyber text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest border border-coedo-cyber/10">TRACK PROFILE</span>
+                                
+                                <!-- Sleek inline equalizer visualizer -->
+                                <div id="jacket-visualizer-overlay" class="flex items-end gap-[3px] h-5 opacity-0 transition-opacity duration-300">
+                                    <div class="w-[3px] bg-coedo-cyber rounded-full ani-bar-1"></div>
+                                    <div class="w-[3px] bg-coedo-cyber rounded-full ani-bar-2"></div>
+                                    <div class="w-[3px] bg-coedo-cyber rounded-full ani-bar-3"></div>
+                                    <div class="w-[3px] bg-coedo-cyber rounded-full ani-bar-4"></div>
+                                    <div class="w-[3px] bg-coedo-cyber rounded-full ani-bar-5"></div>
+                                </div>
+                            </div>
+
+                            <!-- Main Title & Genre -->
+                            <div class="mb-6">
+                                <h3 id="current-track-title" class="font-mincho text-2xl sm:text-3xl font-bold text-slate-900 mb-2 leading-tight">遠い日の花吹雪 (天汐香弓)</h3>
+                                <span id="current-track-genre" class="text-xs font-bold text-coedo-wood uppercase tracking-[2px]">Spring Award-Winning BGM</span>
+                            </div>
+                        </div>
+
+                        <!-- Expanded Description / Liner Notes -->
+                        <div class="my-auto py-4 border-t border-b border-white/5">
+                            <div id="current-track-desc" class="text-xs sm:text-sm text-slate-700 font-light leading-relaxed text-justify space-y-4">
+                                <p>Record Cafe Time Spring BGM コンテスト最優秀賞受賞曲。美しい桜の舞い散る情景を描いた、ノスタルジックで心揺さぶる和モダンBGM。</p>
+                                <p class="flex flex-wrap items-center gap-2">
+                                    <span class="text-slate-500 font-semibold">ご依頼主:</span>
+                                    <a href="https://recordcafe-time.friq.jp/" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+                                        Record Cafe Time 様 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                    </a>
+                                    <span class="text-slate-400">|</span>
+                                    <a href="https://www.instagram.com/record_cafe_time/?hl=ja" target="_blank" class="text-[#e1306c] hover:underline inline-flex items-center gap-1 font-semibold">
+                                        Instagram
+                                    </a>
+                                </p>
+                                <p class="flex flex-wrap items-center gap-2">
+                                    <span class="text-slate-500 font-semibold">クリエイター:</span>
+                                    <a href="https://x.com/teshio_k" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+                                        天汐香弓 様 <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> 公式X
+                                    </a>
+                                </p>
+                                <div class="mt-4 p-4 rounded-xl border border-slate-150 bg-slate-50/50 relative">
+                                    <span class="absolute -top-3 left-4 bg-white px-2 text-[10px] font-bold text-coedo-wood">店主 福田様の感想</span>
+                                    <p class="text-slate-650 italic">「春の爽やかな風と、カフェに差し込む穏やかな日差しが感じられ、聴いていて心地良いです。<br>また、臆病な気持ちを、背中から押してくれる曲です。<br>おおらかなチェロの響きに、どことなくノスタルジックな雰囲気をまとった、素晴らしい曲だと思いました。」</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Panel -->
+                    <div class="relative z-10 space-y-4 pt-4 border-t border-slate-200">
+                        <!-- Progress Slider -->
+                        <div class="flex items-center gap-4 text-xs font-semibold text-slate-400">
+                            <span id="player-time-current">0:00</span>
+                            <div id="player-progress-container" class="flex-1 h-[6px] bg-slate-200 rounded-full cursor-pointer relative group">
+                                <div id="player-progress-bar" class="absolute left-0 top-0 h-full bg-gradient-to-r from-coedo-cyber to-coedo-wood rounded-full w-0 transition-all duration-100"></div>
+                                <div id="player-progress-handle" class="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-coedo-cyber rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-150" style="left: 0%;"></div>
+                            </div>
+                            <span id="player-time-total">0:00</span>
+                        </div>
+
+                        <!-- Audio element (HTML5) -->
+                        <audio id="main-audio" preload="auto"></audio>
+
+                        <!-- Controls Buttons -->
+                        <div class="flex items-center justify-between pt-2">
+                            <!-- Prev Btn -->
+                            <button id="player-btn-prev" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-100 active:scale-95 transition-all" title="前の曲へ">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.334 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Play/Pause Btn -->
+                            <button id="player-btn-play" class="w-14 h-14 rounded-full bg-gradient-to-r from-coedo-cyber to-coedo-wood flex items-center justify-center text-coedo-sumi shadow-lg shadow-coedo-cyber/20 hover:scale-105 active:scale-95 transition-all" title="再生 / 一時停止">
+                                <svg id="play-icon" class="w-6 h-6 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                </svg>
+                                <svg id="pause-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Next Btn -->
+                            <button id="player-btn-next" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-100 active:scale-95 transition-all" title="次の曲へ">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.934 12.8a1 1 0 000-1.6l-5.334-4A1 1 0 005 8v8a1 1 0 001.6.8l5.334-4zM19.934 12.8a1 1 0 000-1.6l-5.334-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.334-4z"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Volume Panel -->
+                            <div class="flex items-center gap-2 group/volume">
+                                <button id="player-btn-mute" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                                    <svg id="volume-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                                    </svg>
+                                </button>
+                                <input id="player-volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-coedo-cyber transition-all">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="case-card">
-                    <div class="case-content">
-                        <span class="case-tag">Seasonal Event</span>
-                        <h3>母の日に「ありがとう」を贈るソングカード</h3>
-                        <p>生成AI音楽を使用し、お母さんへの感謝を込めたオリジナル曲を制作。スマホでいつでも聴けるデジタルメッセージカードとして形にしました。</p>
-                        <a href="https://x.com/miya_SUEMYST/status/2044732547616346160" target="_blank" class="text-link">View Post →</a>
+
+                <!-- Right: Playlist and Explanations -->
+                <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+                    <div id="player-playlist" class="space-y-4">
+                        <!-- Track 1 -->
+                        <div class="track-item active group flex items-center justify-between p-5 rounded-xl border border-coedo-cyber/20 bg-coedo-cyber/5 cursor-pointer transition-all duration-300" data-index="0">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-coedo-cyber/10 flex items-center justify-center text-coedo-cyber font-bold text-sm transition-all group-hover:scale-105">1</div>
+                                <div class="text-left">
+                                    <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-1">遠い日の花吹雪 (天汐香弓)</h4>
+                                    <span class="text-[10px] sm:text-xs font-bold text-coedo-cyber uppercase tracking-wider">Spring Award-Winning BGM</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+                                <span class="track-status-text text-coedo-cyber font-semibold animate-pulse">SELECTED</span>
+                                <span class="track-duration-display">--:--</span>
+                            </div>
+                        </div>
+
+                        <!-- Track 2 -->
+                        <div class="track-item group flex items-center justify-between p-5 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-white/4 hover:border-white/10 cursor-pointer transition-all duration-300" data-index="1">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm transition-all group-hover:scale-105">2</div>
+                                <div class="text-left">
+                                    <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-1">Mandril Masala Caravan (feat. Amira Khan)</h4>
+                                    <span class="text-[10px] sm:text-xs font-bold text-coedo-wood uppercase tracking-wider">Sound & Spice Award-Winning Beat</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+                                <span class="track-status-text">READY</span>
+                                <span class="track-duration-display">--:--</span>
+                            </div>
+                        </div>
+
+                        <!-- Track 3 -->
+                        <div class="track-item group flex items-center justify-between p-5 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-white/4 hover:border-white/10 cursor-pointer transition-all duration-300" data-index="2">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm transition-all group-hover:scale-105">3</div>
+                                <div class="text-left">
+                                    <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-1">新総 技術の交差点 (新座総合技術高校)</h4>
+                                    <span class="text-[10px] sm:text-xs font-bold text-coedo-wood uppercase tracking-wider">AI High School Theme Pop</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+                                <span class="track-status-text">READY</span>
+                                <span class="track-duration-display">--:--</span>
+                            </div>
+                        </div>
+
+                        <!-- Track 4 -->
+                        <div class="track-item group flex items-center justify-between p-5 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-white/4 hover:border-white/10 cursor-pointer transition-all duration-300" data-index="3">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm transition-all group-hover:scale-105">4</div>
+                                <div class="text-left">
+                                    <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-1">東武バスの感想</h4>
+                                    <span class="text-[10px] sm:text-xs font-bold text-coedo-wood uppercase tracking-wider">Mina Gakuin Student Workshop</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+                                <span class="track-status-text">READY</span>
+                                <span class="track-duration-display">--:--</span>
+                            </div>
+                        </div>
+
+                        <!-- Track 5 -->
+                        <div class="track-item group flex items-center justify-between p-5 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-white/4 hover:border-white/10 cursor-pointer transition-all duration-300" data-index="4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm transition-all group-hover:scale-105">5</div>
+                                <div class="text-left">
+                                    <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-1">おかえりの灯り</h4>
+                                    <span class="text-[10px] sm:text-xs font-bold text-coedo-wood uppercase tracking-wider">Mother's Day Digital Song Card</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+                                <span class="track-status-text">READY</span>
+                                <span class="track-duration-display">--:--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- AI Sound Production Note -->
+                    <div class="rounded-xl border border-slate-200 bg-white shadow-sm p-6 text-left relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-coedo-wood/5 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-10 h-10 rounded-lg bg-coedo-cyber/10 flex items-center justify-center text-coedo-cyber shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-1">AI音楽制作のコンセプト</h4>
+                                <p class="text-xs sm:text-sm text-slate-700 font-light leading-relaxed">
+                                    Coedo Music Laboでは、最先端の生成AIツールとプロフェッショナルなマスタリング技術を掛け合わせ、地域活動、教育機関、企業の心に響く新しい音楽表現を追求しています。
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="case-card">
-                    <div class="case-content">
-                        <span class="case-tag">Regional Promotion</span>
-                        <h3>川越AIプロモーションコンテスト</h3>
-                        <p>埼玉県川越市を舞台に、生成AIを活用したプロモーション動画コンテストを開催。最新技術と歴史ある街並みの融合により、新しい観光PRの形を提示しました。</p>
-                        <a href="https://myst0518.github.io/kawagoe-ai-awards/" target="_blank" class="text-link">View Project →</a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="py-24 sm:py-32 relative border-t border-slate-200 bg-gradient-to-b from-white to-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <span class="text-xs sm:text-sm font-extrabold tracking-[6px] text-coedo-wood uppercase block mb-3">WORKS</span>
+                <h2 class="font-mincho text-3xl sm:text-4xl font-bold text-slate-900 tracking-[2px]">活動・イベント実績</h2>
+                <div class="w-12 h-[3px] bg-gradient-to-r from-coedo-cyber to-coedo-wood mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Featured Work: Album Release of This is AI Sound -->
+                <div class="md:col-span-3 group relative rounded-2xl bg-gradient-to-b from-slate-50/50 to-transparent border border-slate-200/60 hover:border-coedo-cyber/50 p-8 sm:p-10 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-1">
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-coedo-cyber/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                                <span class="inline-block bg-gradient-to-r from-red-500 to-red-650 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Press Release</span>
+                                <span class="text-xs font-semibold text-slate-400">2026.07.18</span>
+                            </div>
+                            
+                            <h3 class="font-mincho text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-tight">
+                                最先端AIアーティストコンピレーションアルバム『This is AI Sound』リリース決定！パッケージ限定100枚で8月10日より販売開始
+                            </h3>
+                            
+                            <div class="text-sm sm:text-base text-slate-700 font-light leading-relaxed mb-8 space-y-4">
+                                <p>
+                                    株式会社Coedo Music Laboでは、最先端を走るAIアーティストたちの楽曲を1枚に凝縮したコンピレーションアルバム『This is AI Sound』の販売を決定いたしました！
+                                </p>
+                                <p>
+                                    費用を弊社が完全負担し、バーコード付きの正式パッケージとしてリアル流通（限定100枚）させる本格リリース企画です。8月14日（金）には吉祥寺NEPOでのリアルライブ会場での特別販売も決定しています。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200/60">
+                            <a href="/pr/index.html" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-coedo-cyber hover:text-coedo-cyberDark transition-colors group/pr">
+                                プレスリリースページを見る（全収録楽曲＆アーティスト紹介）
+                                <svg class="w-4 h-4 transition-transform group-hover/pr:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Featured Work: Business Partnership with Parallax Agency -->
+                <div class="md:col-span-3 group relative rounded-2xl bg-gradient-to-b from-slate-50/50 to-transparent border border-slate-200/60 hover:border-coedo-cyber/50 p-8 sm:p-10 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-1">
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-coedo-cyber/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                                <span class="inline-block bg-gradient-to-r from-coedo-cyber to-coedo-cyberDark text-coedo-sumi text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Business Partnership</span>
+                                <span class="text-xs font-semibold text-slate-400">2026.07.05</span>
+                            </div>
+                            
+                            <h3 class="font-mincho text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-tight">
+                                AIタレント事務所「Parallax Agency」と業務提携いたしました！
+                            </h3>
+                            
+                            <div class="text-sm sm:text-base text-slate-700 font-light leading-relaxed mb-8 space-y-4">
+                                <p>
+                                    株式会社Coedo Music Laboは、AIタレント事務所「<a href="https://parallaxagency.company/" target="_blank" class="text-coedo-cyber hover:underline font-semibold inline-flex items-center gap-0.5">Parallax Agency<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>」と業務提携いたしました！
+                                </p>
+                                <p>
+                                    フォロワー数の増加に伴い直面する「なりすましアカウント」への対策や、企業案件における契約・請求実務など、IP活動におけるバックオフィス（事務・法務）を法人として全面的にバックアップする体制をスタートします。
+                                </p>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h4 class="text-xs font-bold text-coedo-wood uppercase tracking-[4px] mb-4">▼ 主な取り組み</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <!-- Initiative 1 -->
+                                    <div class="p-5 rounded-xl border border-slate-200/60 bg-white/50 group-hover:bg-white/80 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-lg bg-coedo-cyber/10 flex items-center justify-center text-coedo-cyber mb-3 font-bold text-sm">1</div>
+                                        <h5 class="text-sm font-bold text-slate-900 mb-2">リーガルサポート</h5>
+                                        <p class="text-xs text-slate-600 leading-relaxed font-light">法人名義による「なりすまし・権利侵害」への警告およびリーガルサポート</p>
+                                    </div>
+                                    <!-- Initiative 2 -->
+                                    <div class="p-5 rounded-xl border border-slate-200/60 bg-white/50 group-hover:bg-white/80 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-lg bg-coedo-wood/10 flex items-center justify-center text-coedo-wood mb-3 font-bold text-sm">2</div>
+                                        <h5 class="text-sm font-bold text-slate-900 mb-2">契約・請求事務窓口</h5>
+                                        <p class="text-xs text-slate-600 leading-relaxed font-light">企業間取引における契約締結・請求実務の窓口代行</p>
+                                    </div>
+                                    <!-- Initiative 3 -->
+                                    <div class="p-5 rounded-xl border border-slate-200/60 bg-white/50 group-hover:bg-white/80 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-lg bg-coedo-cyber/10 flex items-center justify-center text-coedo-cyber mb-3 font-bold text-sm">3</div>
+                                        <h5 class="text-sm font-bold text-slate-900 mb-2">共同開発</h5>
+                                        <p class="text-xs text-slate-600 leading-relaxed font-light">ビジュアル×AI音楽を融合させた「AIミュージシャン」の共同開発</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-xs sm:text-sm text-slate-650 bg-slate-100/80 p-5 rounded-xl border border-slate-200/50 font-light mb-8 leading-relaxed">
+                                <span class="font-bold text-slate-800">💡 IP運営者・クリエイターの皆様へ</span><br>
+                                「フォロワー1000人の壁」を超え、偽物対策や事務手続き、活動のしにくさに悩んでいるIP運営者・クリエイターの皆様、ぜひお気軽にDMにてご相談ください。
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200/60">
+                            <div class="flex flex-wrap gap-4 sm:gap-6">
+                                <a href="https://parallaxagency.company/" target="_blank" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-coedo-cyber hover:text-coedo-cyberDark transition-colors group/plx">
+                                    Parallax Agency 公式サイトを見る 
+                                    <svg class="w-4 h-4 transition-transform group-hover/plx:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                </a>
+                                <a href="pr/parallax.html" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-500 hover:text-coedo-cyber transition-colors group/plx-pr">
+                                    詳細リリース記事を読む
+                                    <svg class="w-4 h-4 transition-transform group-hover/plx-pr:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <a href="#contact" class="px-5 py-2 bg-coedo-cyber hover:bg-coedo-cyberDark text-white text-xs font-bold rounded-full transition-all duration-300 shadow-sm hover:scale-102">
+                                ご相談・お問い合わせ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work 1 -->
+                <div class="group relative rounded-2xl bg-white/2 border border-white/5 hover:border-coedo-cyber/20 p-8 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-2">
+                    <div>
+                        <span class="inline-block bg-gradient-to-r from-coedo-cyber to-coedo-cyberDark text-coedo-sumi text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-6">Educational Workshop</span>
+                        <h3 class="font-mincho text-lg sm:text-xl font-bold text-slate-900 mb-4">美菜学院 × AI音楽ワークショップ</h3>
+                        <p class="text-sm text-slate-700 font-light leading-relaxed mb-6">
+                            「話すのが苦手な子が30秒で自分の歌を作った日」。AIツールを活用し、子供たちの想いを言葉から音楽へと変える新しい表現体験を提供しました。
+                        </p>
+                    </div>
+                    <a href="https://note.com/sue_myst/n/neff0dc1d89af" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-coedo-cyber hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                        記事を読む <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Work 2 -->
+                <div class="group relative rounded-2xl bg-white/2 border border-white/5 hover:border-coedo-wood/20 p-8 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-2">
+                    <div>
+                        <span class="inline-block bg-gradient-to-r from-coedo-wood to-coedo-woodLight text-coedo-sumi text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-6">Seasonal Event</span>
+                        <h3 class="font-mincho text-lg sm:text-xl font-bold text-slate-900 mb-4">母の日に「ありがとう」を贈るソングカード</h3>
+                        <p class="text-sm text-slate-700 font-light leading-relaxed mb-6">
+                            生成AI音楽を使用し、お母さんへの感謝を込めたオリジナル曲を制作。スマホでいつでも聴けるデジタルメッセージカードとして形にしました。
+                        </p>
+                    </div>
+                    <a href="https://x.com/miya_SUEMYST/status/2044732547616346160" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-coedo-wood hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                        ポストを見る <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Work 3 -->
+                <div class="group relative rounded-2xl bg-white/2 border border-white/5 hover:border-coedo-cyber/20 p-8 transition-all duration-500 card-glow flex flex-col justify-between hover:-translate-y-2">
+                    <div>
+                        <span class="inline-block bg-gradient-to-r from-coedo-cyber to-coedo-cyberDark text-coedo-sumi text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-6">Regional Promotion</span>
+                        <h3 class="font-mincho text-lg sm:text-xl font-bold text-slate-900 mb-4">川越AIプロモーションコンテスト</h3>
+                        <p class="text-sm text-slate-700 font-light leading-relaxed mb-6">
+                            埼玉県川越市を舞台に、生成AIを活用したプロモーション動画コンテストを開催。最新技術と歴史ある街並みの融合により、新しい観光PR of 形を提示しました。
+                        </p>
+                    </div>
+                    <a href="https://myst0518.github.io/kawagoe-ai-awards/" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-coedo-cyber hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                        プロジェクトを見る <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 sm:py-32 relative border-t border-slate-200 bg-gradient-to-b from-white to-slate-50">
+        <!-- Decorative subtle background glow -->
+        <div class="absolute top-1/3 right-1/4 w-[350px] h-[350px] bg-coedo-cyber/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-xs sm:text-sm font-extrabold tracking-[6px] text-coedo-cyber uppercase block mb-3">FAQ</span>
+                <h2 class="font-mincho text-3xl sm:text-4xl font-bold text-slate-900 tracking-[2px]">よくあるご質問</h2>
+                <div class="w-12 h-[3px] bg-gradient-to-r from-coedo-cyber to-coedo-wood mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex justify-center flex-wrap gap-4 mb-12">
+                <button id="faq-tab-edu" class="faq-tab-btn active px-6 py-3 rounded-full text-xs sm:text-sm font-bold tracking-wider border transition-all duration-300 bg-coedo-cyber/10 border-coedo-cyber text-coedo-cyber shadow-lg shadow-coedo-cyber/10" data-target="faq-panel-edu">
+                    教育・自治体・学校向け
+                </button>
+                <button id="faq-tab-creator" class="faq-tab-btn px-6 py-3 rounded-full text-xs sm:text-sm font-bold tracking-wider border transition-all duration-300 bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-355" data-target="faq-panel-creator">
+                    クリエイター・一般向け
+                </button>
+                <button id="faq-tab-partner" class="faq-tab-btn px-6 py-3 rounded-full text-xs sm:text-sm font-bold tracking-wider border transition-all duration-300 bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-355" data-target="faq-panel-partner">
+                    採用について
+                </button>
+            </div>
+
+            <!-- Tab Panels -->
+            <div class="space-y-6">
+
+                <!-- Panel 1: Education/Workshop -->
+                <div id="faq-panel-edu" class="faq-panel space-y-4">
+                    <!-- Q1 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-cyber font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-cyber transition-colors">AI音楽のワークショップは、音楽やパソコンの知識がない子どもでも参加できますか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200">
+                                はい、全く問題ありません。タブレットやパソコンを使い、直感的な操作で誰でも数分でクオリティの高い音楽を作ることができます。楽器が弾けない、楽譜が読めないというお子様（あるいは大人の方）こそ、自分の想いが形になる感動を体験していただけます。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-cyber font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-cyber transition-colors">学童保育や学校での出張ワークショップの料金や、準備すべき機材について教えてください。</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200">
+                                ご予算や参加人数、時間に合わせた最適なプランをご提案いたします。基本的な機材（PCやタブレット、必要な周辺機器）は弊社側で持ち込むことも可能ですので、まずは「お問い合わせ」よりお気軽にご相談ください。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-cyber font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-cyber transition-colors">「AIのリテラシー教育」では具体的にどのようなことを教えるのですか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200">
+                                AI技術を便利に楽しく使うための基本ルールに加え、「他人の著作権や肖像権を侵害しないための注意点」「ネット上でのモラルやマナー」など、これからのデジタル社会を安心・安全に生きるために必要な基礎知識を、子どもたちにも分かりやすく噛み砕いてお伝えします。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 2: Creator/General -->
+                <div id="faq-panel-creator" class="faq-panel hidden space-y-4">
+                    <!-- Q1 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-wood font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-wood transition-colors">AIが生成した音楽の著作権はどうなりますか？商用利用や、YouTube・ラジオでの放送は可能ですか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200 space-y-3">
+                                <p>現在の日本の法律（文化庁のガイドライン等）では、AIが自動生成しただけの音楽には原則として「著作権（著作物性）」は発生しないと考えられています。ただし、人間が歌詞を工夫したり、生成された音源を編集・加工したり、AIを「道具」として創作意図を持って作った場合は、人間（クリエイター）の著作物として認められるケースがあります。</p>
+                                <p>商用利用や放送については、使用するAIツール（Suno AIやUdioなど）の利用規約（有料プランの契約状況など）を満たしていれば問題なく可能です。弊社では、ワークショップや楽曲提供において、これら規約や法令を徹底して遵守した安全な音源のみを扱いますので、自治体や学校関係者の皆様も安心してご依頼ください。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-wood font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-wood transition-colors">ラジオ川越で放送していた番組（モーニング・ミストやAI Sound Cypher）について教えてください。また、アーカイブなどはありますか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200 space-y-6">
+                                <p>
+                                    弊社がプロデュース・出演していたラジオ川越（88.7MHz / インターネット放送対応）の各番組（「モーニング・ミスト」「AI Sound Cypher」）は、2026年6月をもって放送を終了いたしました。これまでのご愛聴、ならびに素晴らしい楽曲のご提供、誠にありがとうございました。<br>
+                                    今後のクリエイターコミュニティや新たな発信活動については、公式SNS、または当サイトの「お問い合わせ」より随時お知らせいたします。
+                                </p>
+                                
+                                <!-- Program Cards Grid -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <!-- Program 1 -->
+                                    <div class="rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between hover:border-coedo-cyber/20 transition-all duration-300 relative overflow-hidden group/card">
+                                        <div class="absolute -top-10 -right-10 w-24 h-24 bg-coedo-cyber/5 rounded-full blur-xl pointer-events-none group-hover/card:bg-coedo-cyber/10 transition-colors"></div>
+                                        <div>
+                                            <span class="inline-block bg-slate-100 text-slate-500 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-3">放送終了 Broadcast Ended</span>
+                                            <h4 class="text-slate-800 font-bold text-sm sm:text-base mb-2 flex items-center gap-1.5">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                                モーニング・ミスト
+                                            </h4>
+                                            <p class="text-[11px] sm:text-xs text-slate-700 font-light leading-relaxed mb-4">
+                                                毎週金曜 朝7:00〜8:55 生放送。2025年4月の開始当初からAI音楽を取り入れ、生放送中の音楽生成やリスナーのテーマソング制作などを行った朝の看板番組（2026年6月放送終了）。
+                                            </p>
+                                        </div>
+                                        <div class="w-full text-center py-2.5 bg-slate-100 text-slate-400 border border-slate-200/50 rounded-lg font-bold text-xs">
+                                            放送終了（2025年4月〜2026年6月）
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Program 2 -->
+                                    <div class="rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between hover:border-coedo-wood/20 transition-all duration-300 relative overflow-hidden group/card">
+                                        <div class="absolute -top-10 -right-10 w-24 h-24 bg-coedo-wood/5 rounded-full blur-xl pointer-events-none group-hover/card:bg-coedo-wood/10 transition-colors"></div>
+                                        <div>
+                                            <span class="inline-block bg-slate-100 text-slate-500 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-3">放送終了 Broadcast Ended</span>
+                                            <h4 class="text-slate-800 font-bold text-sm sm:text-base mb-2 flex items-center gap-1.5">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                                AI Sound Cypher
+                                            </h4>
+                                            <p class="text-[11px] sm:text-xs text-slate-700 font-light leading-relaxed mb-4">
+                                                毎週金曜 夜21:00〜21:30 放送。AI音楽のみを30分間ノンストップでDJプレイした、最先端のAI音楽特化型番組（2026年6月放送終了）。多くのクリエイターの皆様から楽曲提供をいただく場となっていました。
+                                            </p>
+                                        </div>
+                                        <div class="w-full text-center py-2.5 bg-slate-100 text-slate-400 border border-slate-200/50 rounded-lg font-bold text-xs">
+                                            放送終了（2025年10月〜2026年6月）
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-wood font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-wood transition-colors">AI音楽の著作権や、SNS上でのトラブルについて個人でも相談できますか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200">
+                                はい、承っております。生成AIを巡るルールは日々変化しており、クリエイターの皆様が不安を抱えやすい部分です。一人で悩まずに、当サイトの問い合わせフォームより「コミュニティ・トラブル・技術的なご相談」を選択してご連絡ください。一企業として真摯にお話を伺い、サポートいたします。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-wood font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-wood transition-colors">AI音楽に関連するイベントや企画への、協賛・後援・機材協力などをお願いすることは可能ですか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200">
+                                はい、前向きに検討させていただきます！弊社はAI音楽クリエイターの皆様の活動支援や、地域・メディアとテクノロジーが交差する温かいコミュニティの醸成を最優先事項としております。イベントの趣旨や規模、求める協力内容（名義後援、番組での告知、技術・機材協力など）を明記の上、当サイトの「お問い合わせ」より企画書や概要を添えてお気軽にご相談ください。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-wood font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-wood transition-colors">お店のBGMや、企業のCMソング・テーマソングなどの楽曲制作を依頼することはできますか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200 space-y-4">
+                                <p>
+                                    はい、喜んで承ります！カフェやショップのオリジナルBGM、企業プロモーション動画用の音楽、社歌やチームのテーマソングなど、幅広いニーズに対応いたします。
+                                </p>
+                                <p>
+                                    従来の楽曲制作に比べて、生成AIを活用することで<strong class="text-slate-800">「圧倒的なスピード」と「リーズナブルなコスト」</strong>でハイクオリティなオリジナル曲をご提供できるのが弊社の強みです。もちろん、事前のヒアリングで「お店のコンセプト」や「出したい雰囲気（和モダン、ポップ、チルなど）」を丁寧にお伺いし、歌詞の制作から音源のブラッシュアップまでトータルでプロデュースいたします。
+                                </p>
+                                <p>
+                                    商用利用の規約をクリアした安全な音源として納品いたしますので、YouTube、SNS広告、店舗での放送、イベント等で安心してお使いいただけます。
+                                </p>
+
+                                <!-- CTA Box -->
+                                <div class="mt-6 p-5 rounded-xl border border-coedo-wood/30 bg-gradient-to-br from-coedo-wood/5 to-transparent relative overflow-hidden group/cta">
+                                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-coedo-wood/5 rounded-full blur-xl pointer-events-none group-hover/cta:bg-coedo-wood/10 transition-colors"></div>
+                                    <div class="flex items-start gap-3">
+                                        <span class="text-lg text-coedo-wood shrink-0">💡</span>
+                                        <div>
+                                            <h4 class="text-slate-800 font-bold text-xs sm:text-sm mb-1.5 flex items-center gap-1.5">
+                                                【まずは無料相談・お見積もりから】
+                                            </h4>
+                                            <p class="text-[11px] sm:text-xs text-slate-700 font-light leading-relaxed mb-3">
+                                                「制作費の目安が知りたい」「まずはサンプルを聴いてみたい」という店舗オーナー様・企業担当者様は、当サイトの「お問い合わせ（お店・企業のテーマソングやBGM作成のご相談）」よりお気軽にご相談ください！
+                                            </p>
+                                            <a href="#contact" class="inline-flex items-center gap-1.5 px-4 py-2 bg-coedo-wood hover:bg-coedo-woodLight text-white font-extrabold text-[10px] sm:text-xs rounded-lg transition-all duration-300 shadow-md shadow-coedo-wood/15 hover:scale-[1.02]">
+                                                お問い合わせはこちらから
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 3: Recruitment & Partner -->
+                <div id="faq-panel-partner" class="faq-panel hidden space-y-4">
+                    <!-- Q1 -->
+                    <div class="faq-item group rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left focus:outline-none">
+                            <span class="flex items-start gap-4">
+                                <span class="text-coedo-cyber font-extrabold text-lg sm:text-xl shrink-0">Q.</span>
+                                <span class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-coedo-cyber transition-colors">採用について　スタッフの採用は行っていますか？</span>
+                            </span>
+                            <span class="faq-icon w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200 shrink-0 transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 pt-2 pl-14 text-xs sm:text-sm text-slate-700 font-light leading-relaxed border-t border-slate-200 space-y-4">
+                                <p>
+                                    はい！現在、株式会社Coedo Music Laboでは、私たちの理念に共感し、一緒にAI音楽の未来を広げてくださる<strong class="text-coedo-cyber">「営業パートナー（業務委託契約）」</strong>を積極的に募集しております。
+                                </p>
+                                <div class="space-y-3 pl-4 border-l-2 border-coedo-cyber/50">
+                                    <p><strong class="text-slate-800">【主な業務内容】</strong><br>地域の学童保育、自治体、教育機関、商業施設への「AI体験ワークショップ・リテラシー教育」の企画提案営業、および企業向けタイアップ・楽曲制作のご提案。</p>
+                                    <p><strong class="text-slate-800">【求める人物像】</strong><br>「AI音楽を通じて社会に貢献したい」「新しいテクノロジーで世界を少し優しくしたい」という熱意のある方。営業経験や人脈を活かし、フルリモートや副業など、ご自身のライフスタイルに合わせて自由に動いていただけます。ノルマ等は一切ありませんので、ご自身のペースで強みを活かしたコミットが可能です。</p>
+                                    <p><strong class="text-slate-800">【応募方法】</strong><br>当サイトの「お問い合わせ」フォームより、メッセージ本文に「業務委託営業への応募・面談希望」と明記し、簡単な経歴やこれまでの実績を添えてご連絡ください。追って代表より面談のご案内をいたします。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Profile Section -->
+    <section id="profile" class="py-24 sm:py-32 relative border-t border-slate-200 bg-gradient-to-b from-coedo-sumiLight to-coedo-sumi">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs sm:text-sm font-extrabold tracking-[6px] text-coedo-wood uppercase block mb-3">ABOUT US</span>
+                <h2 class="font-mincho text-3xl sm:text-4xl font-bold text-slate-900 tracking-[2px]">会社概要</h2>
+                <div class="w-12 h-[3px] bg-gradient-to-r from-coedo-cyber to-coedo-wood mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <!-- Profile glass table -->
+            <div class="rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm">
+                <div class="divide-y divide-slate-200">
+                    
+                    <!-- row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 p-6 sm:p-8 hover:bg-slate-50/50 transition-colors">
+                        <div class="sm:col-span-1 text-slate-600 text-sm tracking-wider font-semibold uppercase flex items-center py-1">会社名</div>
+                        <div class="sm:col-span-3 text-slate-900 font-semibold text-base sm:text-lg flex items-center py-1">株式会社Coedo Music Labo</div>
+                    </div>
+
+                    <!-- row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 p-6 sm:p-8 hover:bg-slate-50/50 transition-colors">
+                        <div class="sm:col-span-1 text-slate-600 text-sm tracking-wider font-semibold uppercase flex items-center py-1">代表取締役</div>
+                        <div class="sm:col-span-3 text-slate-900 font-semibold text-base sm:text-lg flex items-center py-1">宮下　晋(miya)</div>
+                    </div>
+
+                    <!-- row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 p-6 sm:p-8 hover:bg-slate-50/50 transition-colors">
+                        <div class="sm:col-span-1 text-slate-600 text-sm tracking-wider font-semibold uppercase flex items-center py-1">所在地</div>
+                        <div class="sm:col-span-3 text-slate-900 font-semibold text-base sm:text-lg flex items-center py-1">埼玉県ふじみ野市上福岡3-16-10 朝日パリオ上福岡703</div>
+                    </div>
+
+                    <!-- row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 p-6 sm:p-8 hover:bg-slate-50/50 transition-colors">
+                        <div class="sm:col-span-1 text-slate-600 text-sm tracking-wider font-semibold uppercase flex items-center py-1">事業内容</div>
+                        <div class="sm:col-span-3 text-slate-700 font-light text-sm sm:text-base leading-relaxed flex items-center py-1">
+                            AI音楽制作、メディア・ラジオ番組プロデュース、ワークショップ・イベントの企画運営、クリエイターコミュニティの運営および相談窓口
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <h2 class="section-title">CONTACT</h2>
-            <div class="case-cta-box fade-in">
-                <h4>AUDIO SUBMISSION</h4>
-                <p>デモ音源の送付、楽曲制作のご依頼、AIアーティストへの応募などはこちら。</p>
-                <a href="https://forms.gle/naeztrowGt87gPBD9" target="_blank" class="cta-button small">Open Google Form</a>
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-24 sm:py-32 relative border-t border-slate-200 bg-gradient-to-b from-coedo-sumiLight to-coedo-sumi">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs sm:text-sm font-extrabold tracking-[6px] text-coedo-cyber uppercase block mb-3">CONTACT</span>
+                <h2 class="font-mincho text-3xl sm:text-4xl font-bold text-slate-900 tracking-[2px]">お問い合わせ</h2>
+                <div class="w-12 h-[3px] bg-gradient-to-r from-coedo-cyber to-coedo-wood mx-auto mt-6 rounded-full"></div>
             </div>
-            <form class="contact-form fade-in" action="https://formspree.io/f/your-id" method="POST">
-                <div class="form-group">
-                    <label>Inquiry Type</label>
-                    <select name="type">
-                        <option value="general">一般お問い合わせ</option>
-                        <option value="business">業務提携 / 取材</option>
-                        <option value="workshop">ワークショップ開催依頼</option>
-                    </select>
+
+            <!-- Glass form wrapper -->
+            <form class="rounded-2xl border border-slate-200 bg-white shadow-sm backdrop-blur-md p-8 sm:p-12 space-y-8"
+                  action="https://api.web3forms.com/submit"
+                  method="POST">
+                
+                <!-- Web3Forms configuration -->
+                <input type="hidden" name="access_key" value="af7913ef-c4b6-428c-baf5-cd7367700275">
+                <input type="hidden" name="subject" value="【Coedo Music Labo】お問い合わせが届きました">
+                <input type="hidden" name="from_name" value="Coedo Music Labo">
+
+                <div class="grid grid-cols-1 gap-8">
+                    <!-- Inquiry Type -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-semibold tracking-widest text-slate-700 uppercase">お問い合わせ件名</label>
+                        <div class="relative">
+                            <select name="subject" class="w-full bg-white border border-slate-300 rounded-xl px-5 py-4 text-slate-800 focus:outline-none focus:border-coedo-cyber focus:ring-1 focus:ring-coedo-cyber shadow-sm appearance-none cursor-pointer text-sm sm:text-base">
+                                <option value="お店・企業のテーマソングやBGM作成のご相談">お店・企業のテーマソングやBGM作成のご相談</option>
+                                <option value="ワークショップ・セミナー開催のご相談">ワークショップ・セミナー開催のご相談</option>
+                                <option value="楽曲制作・メディア出演のご依頼">楽曲制作・メディア出演のご依頼</option>
+                                <option value="イベント協賛・後援のご依頼">イベント協賛・後援のご依頼</option>
+                                <option value="採用・パートナーへのご応募">採用・パートナーへのご応募</option>
+                                <option value="コミュニティ・トラブルのご相談">コミュニティ・トラブルのご相談</option>
+                                <option value="Parallax Agency について">Parallax Agency について</option>
+                                <option value="その他のお問い合わせ">その他のお問い合わせ</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-5 flex items-center pointer-events-none text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-semibold tracking-widest text-slate-700 uppercase">お名前</label>
+                        <input type="text" name="name" required placeholder="山田 太郎" class="w-full bg-white border border-slate-300 rounded-xl px-5 py-4 text-slate-800 focus:outline-none focus:border-coedo-cyber focus:ring-1 focus:ring-coedo-cyber shadow-sm text-sm sm:text-base">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-semibold tracking-widest text-slate-700 uppercase">メールアドレス</label>
+                        <input type="email" name="email" required placeholder="your@email.com" class="w-full bg-white border border-slate-300 rounded-xl px-5 py-4 text-slate-800 focus:outline-none focus:border-coedo-cyber focus:ring-1 focus:ring-coedo-cyber shadow-sm text-sm sm:text-base">
+                    </div>
+
+                    <!-- Message Body -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-semibold tracking-widest text-slate-700 uppercase">メッセージ内容</label>
+                        <textarea name="message" required placeholder="ご質問やご相談内容をこちらに入力してください。" rows="6" class="w-full bg-white border border-slate-300 rounded-xl px-5 py-4 text-slate-800 focus:outline-none focus:border-coedo-cyber focus:ring-1 focus:ring-coedo-cyber shadow-sm text-sm sm:text-base resize-none"></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" required placeholder="お名前">
+
+                <div class="pt-4">
+                    <button type="submit" class="w-full py-4 sm:py-5 bg-gradient-to-r from-coedo-cyber to-coedo-cyberDark hover:from-coedo-cyberDark hover:to-coedo-cyber text-white font-extrabold tracking-widest rounded-xl hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-lg shadow-coedo-cyber/20">
+                        メッセージを送信する
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" required placeholder="メールアドレス">
-                </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea name="message" required placeholder="メッセージを入力してください"></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send Message</button>
             </form>
         </div>
     </section>
 
-    <footer>
-        <div class="sns-links">
-            <a href="https://x.com/miya_SUEMYST" target="_blank" class="sns-link">Representative X</a>
-            <a href="https://x.com/CoedoMusicLabo" target="_blank" class="sns-link">Company X</a>
+    <!-- Footer -->
+    <footer class="bg-coedo-sumi border-t border-slate-200 py-12 sm:py-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+            <div class="flex flex-col items-center md:items-start gap-3">
+                <img src="assets/images/logo_transparent_cropped.png" alt="Coedo Music Labo" class="h-14 w-auto object-contain opacity-80">
+                <p class="text-xs sm:text-sm text-slate-500 font-light">昨日よりも少しだけ、優しい世界を音で作る。</p>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end gap-5">
+                <div class="flex gap-4">
+                    <a href="https://x.com/miya_SUEMYST" target="_blank" class="px-4 py-2 rounded-full bg-slate-100 border border-slate-200 hover:border-coedo-cyber hover:text-coedo-cyber transition-all text-xs font-semibold tracking-wider text-slate-700">Representative X</a>
+                    <a href="https://x.com/CoedoMusicLabo" target="_blank" class="px-4 py-2 rounded-full bg-slate-100 border border-slate-200 hover:border-coedo-cyber hover:text-coedo-cyber transition-all text-xs font-semibold tracking-wider text-slate-700">Company X</a>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-xs sm:text-sm text-slate-500 mb-2">埼玉県ふじみ野市上福岡3-16-10 朝日パリオ上福岡703</p>
+                    <p class="text-[10px] sm:text-xs text-slate-600 font-mono tracking-widest">&copy; 2026 COEDO MUSIC LABO. All Rights Reserved.</p>
+                </div>
+            </div>
         </div>
-        <p class="address" style="margin-bottom: 1rem; color: rgba(255, 255, 255, 0.6);">埼玉県ふじみ野市上福岡3-16-10 朝日パリオ上福岡703</p>
-        <p>&copy; 2026 COEDO MUSIC LABO. All Rights Reserved.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Interactive Navigation Scripts -->
+    <script>
+        // AI Audio Player Logic
+        const TRACKS = [
+            {
+                title: "遠い日の花吹雪 (天汐香弓)",
+                desc: `<p>Record Cafe Time Spring BGM コンテスト最優秀賞受賞曲。美しい桜の舞い散る情景を描いた、ノスタルジックで心揺さぶる和モダンBGM。</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">ご依頼主:</span>
+    <a href="https://recordcafe-time.friq.jp/" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+        Record Cafe Time 様 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+    </a>
+    <span class="text-slate-400">|</span>
+    <a href="https://www.instagram.com/record_cafe_time/?hl=ja" target="_blank" class="text-[#e1306c] hover:underline inline-flex items-center gap-1 font-semibold">
+        Instagram
+    </a>
+</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">クリエイター:</span>
+    <a href="https://x.com/teshio_k" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+        天汐香弓 様 <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> 公式X
+    </a>
+</p>
+<div class="mt-4 p-4 rounded-xl border border-slate-150 bg-slate-50/50 relative">
+    <span class="absolute -top-3 left-4 bg-white px-2 text-[10px] font-bold text-coedo-wood">店主 福田様の感想</span>
+    <p class="text-slate-650 italic">「春の爽やかな風と、カフェに差し込む穏やかな日差しが感じられ、聴いていて心地良いです。<br>また、臆病な気持ちを、背中から押してくれる曲です。<br>おおらかなチェロの響きに、どことなくノスタルジックな雰囲気をまとった、素晴らしい曲だと思いました。」</p>
+</div>`,
+                src: "assets/audio/tooihino_hanafubuki.mp3",
+                genre: "Spring Award-Winning BGM",
+                duration: "--:--"
+            },
+            {
+                title: "Mandril Masala Caravan (feat. Amira Khan)",
+                desc: `<p>2025年11月に実施された、マンドリルカレーのテーマソング作成コンテストでの最優秀賞受賞曲。</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">ご依頼主:</span>
+    <a href="https://mandrillcurry.jp/" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+        マンドリルカレー 様 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+    </a>
+</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">クリエイター:</span>
+    <a href="https://x.com/mens_brief" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+        men's brief factory (メンブリ) 様 <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> 公式X
+    </a>
+</p>`,
+                src: "assets/audio/mandril_masala_caravan.mp3",
+                genre: "Sound & Spice Award-Winning Beat",
+                duration: "--:--"
+            },
+            {
+                title: "新総 技術の交差点 (新座総合技術高校)",
+                desc: `<p>埼玉県立新座総合技術高等学校とのコラボレーションによるテーマソング。</p>
+<p>「新総」が目指す未来のものづくり、デザイン、ITなど、多分野のテクノロジーが交差する瞬間の興奮と、次世代を担う若者たちの躍動するエネルギーをイメージした爽快なフューチャーポップです。</p>`,
+                src: "assets/audio/shinsou_gijutsu_no_kousaten.mp3",
+                genre: "AI High School Theme Pop",
+                duration: "--:--"
+            },
+            {
+                title: "東武バスの感想",
+                desc: `<p>美菜学院おんがくワークショップにて、生徒さんが制作した創造力あふれるAIサウンド作品。</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">企画・ワークショップ:</span>
+    <a href="https://note.com/sue_myst/n/neff0dc1d89af" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+        美菜学院 × AI音楽ワークショップ <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+    </a>
+</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">クリエイター:</span>
+    <span class="text-white font-semibold">生徒さん（匿名）</span>
+</p>`,
+                src: "assets/audio/tobu_bus_no_kanso.mp3",
+                genre: "Mina Gakuin Student Workshop",
+                duration: "--:--"
+            },
+            {
+                title: "おかえりの灯り",
+                desc: `<p>母の日に「ありがとう」を贈るソングカードキャンペーンにて制作された、温かなアコースティック・ファミリーソング。</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">企画・イベント:</span>
+    <a href="https://x.com/miya_SUEMYST/status/2044732547616346160" target="_blank" class="text-coedo-cyber hover:underline inline-flex items-center gap-1 font-semibold">
+        母の日に「ありがとう」を贈るソングカード <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+    </a>
+</p>
+<p class="flex flex-wrap items-center gap-2">
+    <span class="text-slate-500 font-semibold">クリエイター:</span>
+    <span class="text-white font-semibold">匿名のママさん（※仮名）</span>
+</p>`,
+                src: "assets/audio/okaeri_no_akari.mp3",
+                genre: "Mother's Day Digital Song Card",
+                duration: "--:--"
+            }
+        ];
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+
+        const mainAudio = document.getElementById('main-audio');
+        const playBtn = document.getElementById('player-btn-play');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const prevBtn = document.getElementById('player-btn-prev');
+        const nextBtn = document.getElementById('player-btn-next');
+        const muteBtn = document.getElementById('player-btn-mute');
+        const volumeIcon = document.getElementById('volume-icon');
+        const volumeSlider = document.getElementById('player-volume-slider');
+        const progressContainer = document.getElementById('player-progress-container');
+        const progressBar = document.getElementById('player-progress-bar');
+        const progressHandle = document.getElementById('player-progress-handle');
+        const timeCurrent = document.getElementById('player-time-current');
+        const timeTotal = document.getElementById('player-time-total');
+        
+        const currentTitle = document.getElementById('current-track-title');
+        const currentDesc = document.getElementById('current-track-desc');
+        const currentGenre = document.getElementById('current-track-genre');
+        const visualizerOverlay = document.getElementById('jacket-visualizer-overlay');
+        const trackItems = document.querySelectorAll('.track-item');
+
+        // Load Track
+        function loadTrack(index) {
+            currentTrackIndex = index;
+            const track = TRACKS[index];
+            mainAudio.src = track.src;
+            currentTitle.textContent = track.title;
+            currentDesc.innerHTML = track.desc;
+            if (currentGenre) currentGenre.textContent = track.genre;
+            timeTotal.textContent = track.duration;
+            timeCurrent.textContent = "0:00";
+            progressBar.style.width = "0%";
+            progressHandle.style.left = "0%";
+
+            // Update Track List UI
+            trackItems.forEach((item, idx) => {
+                const statusText = item.querySelector('.track-status-text');
+                if (idx === index) {
+                    item.classList.add('active', 'border-coedo-cyber/20', 'bg-coedo-cyber/5');
+                    item.classList.remove('border-slate-200', 'bg-white');
+                    statusText.textContent = isPlaying ? "PLAYING" : "SELECTED";
+                    statusText.classList.add('text-coedo-cyber', 'animate-pulse');
+                } else {
+                    item.classList.remove('active', 'border-coedo-cyber/20', 'bg-coedo-cyber/5');
+                    item.classList.add('border-slate-200', 'bg-white');
+                    statusText.textContent = "READY";
+                    statusText.classList.remove('text-coedo-cyber', 'animate-pulse');
+                }
+            });
+        }
+
+        // Play Track
+        function playTrack() {
+            isPlaying = true;
+            mainAudio.play().then(() => {
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                visualizerOverlay.classList.remove('opacity-0');
+                visualizerOverlay.classList.add('opacity-100');
+                const activeStatus = trackItems[currentTrackIndex].querySelector('.track-status-text');
+                activeStatus.textContent = "PLAYING";
+            }).catch(e => {
+                console.log("Audio play prevented or error: ", e);
+                pauseTrack();
+            });
+        }
+
+        // Pause Track
+        function pauseTrack() {
+            isPlaying = false;
+            mainAudio.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            visualizerOverlay.classList.add('opacity-0');
+            visualizerOverlay.classList.remove('opacity-100');
+            const activeStatus = trackItems[currentTrackIndex].querySelector('.track-status-text');
+            activeStatus.textContent = "SELECTED";
+        }
+
+        // Toggle Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                pauseTrack();
+            } else {
+                playTrack();
+            }
+        });
+
+        // Prev Track
+        prevBtn.addEventListener('click', () => {
+            let nextIndex = currentTrackIndex - 1;
+            if (nextIndex < 0) nextIndex = TRACKS.length - 1;
+            loadTrack(nextIndex);
+            if (isPlaying) playTrack();
+        });
+
+        // Next Track
+        nextBtn.addEventListener('click', () => {
+            let nextIndex = currentTrackIndex + 1;
+            if (nextIndex >= TRACKS.length) nextIndex = 0;
+            loadTrack(nextIndex);
+            if (isPlaying) playTrack();
+        });
+
+        // Tracklist clicking
+        trackItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                if (currentTrackIndex === index) {
+                    if (isPlaying) pauseTrack();
+                    else playTrack();
+                } else {
+                    loadTrack(index);
+                    playTrack();
+                }
+            });
+        });
+
+        // Volume Change
+        volumeSlider.addEventListener('input', (e) => {
+            const vol = e.target.value;
+            mainAudio.volume = vol;
+            if (vol == 0) {
+                volumeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
+            } else {
+                volumeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
+            }
+        });
+
+        // Mute Toggle
+        let lastVolume = 0.8;
+        muteBtn.addEventListener('click', () => {
+            if (mainAudio.volume > 0) {
+                lastVolume = mainAudio.volume;
+                mainAudio.volume = 0;
+                volumeSlider.value = 0;
+                volumeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
+            } else {
+                mainAudio.volume = lastVolume;
+                volumeSlider.value = lastVolume;
+                volumeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
+            }
+        });
+
+        // Progress Bar updates
+        mainAudio.addEventListener('timeupdate', () => {
+            const currentTime = mainAudio.currentTime;
+            const duration = mainAudio.duration || 0;
+            if (duration > 0) {
+                const percent = (currentTime / duration) * 100;
+                progressBar.style.width = percent + "%";
+                progressHandle.style.left = percent + "%";
+                
+                // Format Current Time
+                const mins = Math.floor(currentTime / 60);
+                const secs = Math.floor(currentTime % 60);
+                timeCurrent.textContent = mins + ":" + (secs < 10 ? '0' : '') + secs;
+            }
+        });
+
+        // Dynamic Duration update on load
+        mainAudio.addEventListener('loadedmetadata', () => {
+            const duration = mainAudio.duration || 0;
+            if (duration > 0) {
+                const mins = Math.floor(duration / 60);
+                const secs = Math.floor(duration % 60);
+                const formattedTime = mins + ":" + (secs < 10 ? '0' : '') + secs;
+                timeTotal.textContent = formattedTime;
+                
+                // Also update the static list display for the active track
+                const activeDisplay = trackItems[currentTrackIndex].querySelector('.track-duration-display');
+                if (activeDisplay) {
+                    activeDisplay.textContent = formattedTime;
+                }
+            }
+        });
+
+        // Click Progress Bar to Seek
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = mainAudio.duration || 0;
+            if (duration > 0) {
+                mainAudio.currentTime = (clickX / width) * duration;
+            }
+        });
+
+        // Auto play next track when ended
+        mainAudio.addEventListener('ended', () => {
+            let nextIndex = currentTrackIndex + 1;
+            if (nextIndex >= TRACKS.length) nextIndex = 0;
+            loadTrack(nextIndex);
+            playTrack();
+        });
+
+        // Initialize Audio Player
+        loadTrack(0);
+
+        // Mobile menu toggle logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click of nav items
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Change navbar bg transparency on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-coedo-sumi/95', 'shadow-lg', 'shadow-black/25');
+                navbar.classList.remove('bg-coedo-sumi/80');
+            } else {
+                navbar.classList.add('bg-coedo-sumi/80');
+                navbar.classList.remove('bg-coedo-sumi/95', 'shadow-lg', 'shadow-black/25');
+            }
+        });
+
+        // Greeting collapse/expand toggle
+        const greetingWrapper = document.getElementById('greeting-wrapper');
+        const greetingFade = document.getElementById('greeting-fade');
+        const greetingToggleBtn = document.getElementById('greeting-toggle-btn');
+        const greetingToggleText = document.getElementById('greeting-toggle-text');
+        const greetingToggleIcon = document.getElementById('greeting-toggle-icon');
+
+        let isGreetingExpanded = false;
+
+        greetingToggleBtn.addEventListener('click', () => {
+            isGreetingExpanded = !isGreetingExpanded;
+            if (isGreetingExpanded) {
+                greetingWrapper.style.maxHeight = greetingWrapper.scrollHeight + "px";
+                greetingFade.classList.add('opacity-0');
+                greetingFade.classList.remove('opacity-100');
+                greetingToggleText.textContent = "閉じる";
+                greetingToggleIcon.style.transform = "rotate(180deg)";
+            } else {
+                greetingWrapper.style.maxHeight = "300px";
+                greetingFade.classList.remove('opacity-0');
+                greetingFade.classList.add('opacity-100');
+                greetingToggleText.textContent = "全文を読む";
+                greetingToggleIcon.style.transform = "rotate(0deg)";
+                
+                // Scroll back to greeting section smoothly so user isn't lost
+                document.getElementById('greeting').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // FAQ Tabs and Accordion Toggle
+        const faqTabBtns = document.querySelectorAll('.faq-tab-btn');
+        const faqPanels = document.querySelectorAll('.faq-panel');
+
+        faqTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Deactivate all buttons
+                faqTabBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-coedo-cyber/10', 'border-coedo-cyber', 'text-coedo-cyber', 'shadow-lg', 'shadow-coedo-cyber/10');
+                    b.classList.add('bg-slate-100', 'border-slate-200', 'text-slate-600');
+                });
+                
+                // Activate clicked button
+                btn.classList.add('active', 'bg-coedo-cyber/10', 'border-coedo-cyber', 'text-coedo-cyber', 'shadow-lg', 'shadow-coedo-cyber/10');
+                btn.classList.remove('bg-slate-100', 'border-slate-200', 'text-slate-600');
+
+                // Hide all panels
+                faqPanels.forEach(panel => panel.classList.add('hidden'));
+
+                // Show target panel
+                const targetId = btn.getAttribute('data-target');
+                document.getElementById(targetId).classList.remove('hidden');
+            });
+        });
+
+        // Accordion functionality
+        const faqTriggers = document.querySelectorAll('.faq-trigger');
+        faqTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const item = trigger.closest('.faq-item');
+                const content = item.querySelector('.faq-content');
+                const icon = item.querySelector('.faq-icon svg');
+                
+                // Toggle active state
+                const isOpen = item.classList.toggle('faq-active');
+                
+                if (isOpen) {
+                    content.style.maxHeight = (content.scrollHeight + 25) + "px";
+                    icon.style.transform = "rotate(180deg)";
+                    item.classList.add('border-coedo-cyber/40', 'bg-slate-50');
+                } else {
+                    content.style.maxHeight = "0px";
+                    icon.style.transform = "rotate(0deg)";
+                    item.classList.remove('border-coedo-cyber/40', 'bg-slate-50');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
